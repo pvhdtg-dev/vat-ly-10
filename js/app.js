@@ -146,7 +146,6 @@ const App = {
     }
 
     this.renderMath();
-    setTimeout(() => this.renderMath(), 400);
   },
 
   loadProgress() {
@@ -218,11 +217,15 @@ const App = {
           if (window.PhysicsSims.projectile) window.PhysicsSims.projectile.draw();
         }
       }, 50);
-    } else if (tabId === 'stats') {
-      this.renderStats();
+    } else {
+      if (window.PhysicsSims) {
+        window.PhysicsSims.pauseAll();
+      }
+      if (tabId === 'stats') {
+        this.renderStats();
+      }
     }
 
-    this.renderMath();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 
@@ -350,7 +353,7 @@ const App = {
       </div>
     `;
 
-    this.renderMath();
+    this.renderMath(container);
   },
 
   getPrevLessonBtn(currentNum) {
@@ -611,7 +614,7 @@ const App = {
       </div>
     `;
 
-    this.renderMath();
+    this.renderMath(area);
   },
 
   renderQuestionInput(q, isChecked) {
@@ -905,6 +908,7 @@ const App = {
         </div>
       </div>
     `).join('');
+    this.renderMath(container);
   },
 
   // STATS & MISTAKE NOTEBOOK
@@ -986,7 +990,7 @@ const App = {
       </div>
     `;
 
-    this.renderMath();
+    this.renderMath(container);
   },
 
   clearMistakes() {
@@ -999,36 +1003,24 @@ const App = {
     this.renderStats();
   },
 
-  renderMath() {
+  renderMath(container) {
+    const root = container || document;
     if (window.katex) {
-      document.querySelectorAll('.katex-inline').forEach(el => {
-        if (!el.dataset.rendered) {
-          try {
-            katex.render(el.textContent.trim(), el, { displayMode: false, throwOnError: false });
-            el.dataset.rendered = 'true';
-          } catch(e) {}
-        }
+      root.querySelectorAll('.katex-inline:not([data-rendered])').forEach(el => {
+        try {
+          katex.render(el.textContent.trim(), el, { displayMode: false, throwOnError: false });
+          el.dataset.rendered = 'true';
+        } catch(e) {}
       });
-      document.querySelectorAll('.katex-display').forEach(el => {
-        if (!el.dataset.rendered) {
-          try {
-            katex.render(el.textContent.trim(), el, { displayMode: true, throwOnError: false });
-            el.dataset.rendered = 'true';
-          } catch(e) {}
-        }
+      root.querySelectorAll('.katex-display:not([data-rendered])').forEach(el => {
+        try {
+          katex.render(el.textContent.trim(), el, { displayMode: true, throwOnError: false });
+          el.dataset.rendered = 'true';
+        } catch(e) {}
       });
-    }
-    if (window.renderMathInElement) {
-      try {
-        window.renderMathInElement(document.body, {
-          delimiters: [
-            { left: "$$", right: "$$", display: true },
-            { left: "\\(", right: "\\)", display: false },
-            { left: "\\[", right: "\\]", display: true }
-          ],
-          throwOnError: false
-        });
-      } catch (e) {}
+    } else {
+      // If KaTeX hasn't finished loading yet, retry once after load
+      window.addEventListener('load', () => this.renderMath(container), { once: true });
     }
   }
 };

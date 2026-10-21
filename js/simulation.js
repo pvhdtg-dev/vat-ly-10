@@ -730,5 +730,10 @@ window.PhysicsSims = {
     this.motion = new MotionSimulation('canvas-motion');
     this.freefall = new FreeFallSimulation('canvas-freefall');
     this.projectile = new ProjectileSimulation('canvas-projectile');
+  },
+  pauseAll() {
+    if (this.motion) this.motion.pause();
+    if (this.freefall) this.freefall.isRunning = false;
+    if (this.projectile) this.projectile.isRunning = false;
   }
 };
