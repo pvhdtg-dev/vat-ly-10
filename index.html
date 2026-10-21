@@ -10,9 +10,8 @@
   <link rel="stylesheet" href="css/tailwind.min.css">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- KaTeX for crisp mathematical formulas (Deferred for ultra-fast initial paint) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <!-- KaTeX stylesheet (Self-hosted locally for 100% reliability & zero CDN blocks) -->
+  <link rel="stylesheet" href="css/katex.min.css">
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
 
@@ -394,7 +393,8 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Scripts (Self-hosted & loaded synchronously in exact dependency order) -->
+  <script src="js/katex.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/simulation.js"></script>
   <script src="js/app.js"></script>

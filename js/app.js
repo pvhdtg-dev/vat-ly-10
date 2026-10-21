@@ -1005,7 +1005,8 @@ const App = {
 
   renderMath(container) {
     const root = container || document;
-    if (window.katex) {
+    const executeRender = () => {
+      if (!window.katex) return false;
       root.querySelectorAll('.katex-inline:not([data-rendered])').forEach(el => {
         try {
           const formula = el.textContent.trim();
@@ -1034,9 +1035,18 @@ const App = {
           el.dataset.rendered = 'true';
         } catch(e) {}
       });
-    } else {
-      // If KaTeX hasn't finished loading yet, retry once after load
-      window.addEventListener('load', () => this.renderMath(container), { once: true });
+      return true;
+    };
+
+    if (!executeRender()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (executeRender() || attempts > 30) {
+          clearInterval(interval);
+        }
+      }, 50);
+      window.addEventListener('load', () => executeRender(), { once: true });
     }
   }
 };

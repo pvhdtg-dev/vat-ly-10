@@ -40,7 +40,7 @@ body {
   border: 1px solid rgba(51, 65, 85, 0.8);
 }
 
-/* KaTeX custom spacing */
+/* KaTeX custom spacing & fraction display */
 .katex-display {
   margin: 0.6em 0 !important;
   overflow-x: auto;
@@ -49,6 +49,19 @@ body {
 }
 .katex {
   font-size: 1.08em;
+  text-rendering: auto;
+}
+
+/* Ensure fraction bars and vertical stacks never collapse */
+.katex .mfrac {
+  display: inline-block;
+  vertical-align: -0.5em;
+}
+.katex .frac-line {
+  display: block !important;
+  border-bottom: 1.5px solid currentColor !important;
+  width: 100% !important;
+  min-height: 1px !important;
 }
 
 /* Hide MathML tree to prevent duplicate rendering and translator interference */
