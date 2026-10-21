@@ -189,10 +189,26 @@ const App = {
         this.switchTab(target);
       });
     });
+
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['theory', 'practice', 'simulations', 'formulas', 'stats'].includes(hash)) {
+        this.switchTab(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHash);
+    handleHash();
   },
 
   switchTab(tabId) {
     this.activeTab = tabId;
+    try {
+      if (window.location.hash !== '#' + tabId) {
+        history.replaceState(null, '', '#' + tabId);
+      }
+    } catch(e) {}
+
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     const targetContent = document.getElementById(`tab-${tabId}`);
     if (targetContent) targetContent.classList.add('active');
