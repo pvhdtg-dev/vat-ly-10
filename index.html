@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vật Lí 10 - Chương II: Động Học | Học Lý Thuyết & Luyện Bài Tập</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for crisp mathematical formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50 hidden"></canvas>
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo & Title -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+            <span class="font-extrabold text-lg">⚡</span>
+          </div>
+          <div>
+            <div class="font-extrabold text-base sm:text-lg leading-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+              VẬT LÍ 10 · ĐỘNG HỌC
+            </div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              Sách Kết Nối Tri Thức Với Cuộc Sống (Trang 20 - 54)
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Nav Tabs (Desktop) -->
+        <nav class="hidden md:flex items-center space-x-1 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-medium">
+          <button data-tab-target="theory" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 text-white shadow-md transition flex items-center space-x-1.5">
+            <span>📖 Lý Thuyết</span>
+          </button>
+          <button data-tab-target="practice" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition flex items-center space-x-1.5">
+            <span>✍️ Luyện Bài Tập</span>
+          </button>
+          <button data-tab-target="simulations" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition flex items-center space-x-1.5">
+            <span>🔬 Mô Phỏng Ảo</span>
+          </button>
+          <button data-tab-target="formulas" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition flex items-center space-x-1.5">
+            <span>📋 Sổ Tay Công Thức</span>
+          </button>
+          <button data-tab-target="stats" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition flex items-center space-x-1.5">
+            <span>📊 Thống Kê</span>
+          </button>
+        </nav>
+
+        <!-- Right: Theme Toggle & Info -->
+        <div class="flex items-center space-x-2">
+          <button id="btn-toggle-theme" title="Đổi giao diện Sáng / Tối"
+            class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+            <span class="dark:hidden">🌙</span>
+            <span class="hidden dark:inline">☀️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Tab Bar -->
+      <div class="flex md:hidden overflow-x-auto py-2 border-t border-slate-200 dark:border-slate-800 gap-1 text-xs font-medium no-scrollbar">
+        <button data-tab-target="theory" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white shrink-0">📖 Lý Thuyết</button>
+        <button data-tab-target="practice" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 shrink-0">✍️ Bài Tập</button>
+        <button data-tab-target="simulations" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 shrink-0">🔬 Mô Phỏng</button>
+        <button data-tab-target="formulas" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 shrink-0">📋 Công Thức</button>
+        <button data-tab-target="stats" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 shrink-0">📊 Tiến Độ</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ================= TAB 1: LÝ THUYẾT (THEORY) ================= -->
+    <div id="tab-theory" class="tab-content active">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Sidebar: Danh sách 9 bài học -->
+        <div class="lg:col-span-4 xl:col-span-3">
+          <div class="sticky top-24 glass-card rounded-2xl p-4 shadow-sm">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 dark:border-slate-800">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Chương II: Động học (9 Bài)
+              </span>
+              <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">KNTT</span>
+            </div>
+            <div id="lessons-nav-list" class="max-h-[calc(100vh-180px)] overflow-y-auto pr-1">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content: Chi tiết bài học đã chọn -->
+        <div class="lg:col-span-8 xl:col-span-9" id="lesson-detail-container">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 2: LUYỆN BÀI TẬP (PRACTICE) ================= -->
+    <div id="tab-practice" class="tab-content">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <!-- Filter and Mode Selection Header -->
+        <div class="glass-card rounded-2xl p-5 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <!-- Mode Switcher -->
+            <div class="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 w-fit text-sm font-medium">
+              <button id="mode-practice-btn" class="px-4 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-indigo-600 dark:text-white transition">
+                ⚡ Luyện Tập Tự Do
+              </button>
+              <button id="mode-exam-btn" class="px-4 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 transition">
+                ⏱️ Thi Thử (15 Phút)
+              </button>
+            </div>
+
+            <!-- Exam Timer (hidden by default) -->
+            <div id="exam-timer-box" class="hidden items-center space-x-2 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 px-4 py-1.5 rounded-xl text-rose-700 dark:text-rose-300 font-mono font-bold text-base">
+              <span>⏳ Thời gian còn lại:</span>
+              <span id="exam-timer-display">15:00</span>
+            </div>
+
+            <!-- Filter Dropdowns -->
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="quiz-filter-lesson" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                <!-- Dynamically populated -->
+              </select>
+
+              <select id="quiz-filter-level" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                <option value="all">Tất cả mức độ</option>
+                <option value="nhan_biet">Nhận biết</option>
+                <option value="thong_hieu">Thông hiểu</option>
+                <option value="van_dung">Vận dụng</option>
+                <option value="van_dung_cao">Vận dụng cao</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Render Box -->
+        <div id="quiz-render-area">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 3: MÔ PHỎNG ẢO (SIMULATIONS) ================= -->
+    <div id="tab-simulations" class="tab-content">
+      <div class="space-y-8 max-w-5xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">
+            Phòng Thí Nghiệm Trực Quan
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-2">
+            Mô Phỏng Vật Lý Tương Tác
+          </h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Tự tay thay đổi thông số, quan sát quỹ đạo và kiểm chứng trực tiếp các công thức trong SGK Vật lí 10.
+          </p>
+        </div>
+
+        <!-- SIMULATION 1: Chuyển động thẳng & Đồ thị v-t, d-t -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+                <span class="mr-2">🏎️</span> Mô phỏng 1: Chuyển Động Thẳng Biến Đổi Đều & Đồ Thị (Bài 8 & 9)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Quan sát ô tô chạy trên đường và đồ thị v(t), d(t) được vẽ trực tiếp theo thời gian thực.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button id="sim1-start" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-sm transition">
+                Bắt đầu chạy
+              </button>
+              <button id="sim1-reset" class="px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition">
+                Đặt lại
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl text-xs">
+            <div>
+              <div class="flex justify-between font-semibold mb-1">
+                <span>Vận tốc đầu (v₀):</span>
+                <span id="sim1-v0-val" class="text-indigo-600 dark:text-indigo-400 font-bold">5.0 m/s</span>
+              </div>
+              <input type="range" id="sim1-v0" min="0" max="15" step="0.5" value="5" class="w-full accent-indigo-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-semibold mb-1">
+                <span>Gia tốc (a):</span>
+                <span id="sim1-a-val" class="text-indigo-600 dark:text-indigo-400 font-bold">1.5 m/s²</span>
+              </div>
+              <input type="range" id="sim1-a" min="-3" max="3" step="0.2" value="1.5" class="w-full accent-indigo-600">
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Thời gian t</span>
+              <span id="sim1-t-disp" class="text-base font-extrabold text-slate-800 dark:text-slate-100 font-mono">0.00 s</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Độ dịch chuyển d</span>
+              <span id="sim1-x-disp" class="text-base font-extrabold text-emerald-600 font-mono">0.0 m</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Vận tốc tức thời v</span>
+              <span id="sim1-v-disp" class="text-base font-extrabold text-blue-600 font-mono">5.00 m/s</span>
+            </div>
+          </div>
+
+          <!-- Canvas -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-2 overflow-hidden">
+            <canvas id="canvas-motion" class="w-full h-[280px] block rounded-lg"></canvas>
+          </div>
+        </div>
+
+        <!-- SIMULATION 2: Ống chân không Newton & Rơi tự do -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+                <span class="mr-2">🪶</span> Mô phỏng 2: Ống Chân Không Newton & Sự Rơi Tự Do (Bài 10 & 11)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">So sánh sự rơi của viên bi chì và lông chim trong không khí vs trong ống hút chân không.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button id="sim2-drop" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition">
+                Thả rơi vật
+              </button>
+              <button id="sim2-reset" class="px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition">
+                Đặt lại
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl text-xs">
+            <div>
+              <div class="flex justify-between font-semibold mb-1">
+                <span>Độ cao thả (h):</span>
+                <span id="sim2-h-val" class="text-emerald-600 font-bold">30 m</span>
+              </div>
+              <input type="range" id="sim2-h" min="10" max="60" step="5" value="30" class="w-full accent-emerald-600">
+            </div>
+
+            <div>
+              <span class="font-semibold block mb-1">Môi trường trong ống:</span>
+              <select id="sim2-env" class="w-full px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs font-semibold">
+                <option value="air">Có không khí (Lực cản lớn)</option>
+                <option value="vacuum">Hút chân không (Rơi tự do)</option>
+              </select>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Thời gian rơi lý thuyết</span>
+              <span id="sim2-theory-time" class="text-base font-extrabold text-slate-800 dark:text-slate-100 font-mono">2.474 s</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Thời gian viên bi chạm đất</span>
+              <span id="sim2-ball-time" class="text-base font-extrabold text-blue-600 font-mono">0.000 s</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Thời gian lông chim chạm đất</span>
+              <span id="sim2-feather-time" class="text-base font-extrabold text-rose-500 font-mono">0.000 s</span>
+            </div>
+          </div>
+
+          <!-- Canvas -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-2 overflow-hidden">
+            <canvas id="canvas-freefall" class="w-full h-[280px] block rounded-lg"></canvas>
+          </div>
+        </div>
+
+        <!-- SIMULATION 3: Bắn pháo Ném xiên & Ném ngang -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200 dark:border-slate-800">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+                <span class="mr-2">🎯</span> Mô phỏng 3: Quỹ Đạo Ném Xiên & Ném Ngang (Bài 12)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Điều chỉnh góc bắn và vận tốc để quan sát quỹ đạo parabol, tìm góc bắn để đạt tầm xa cực đại.</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button id="sim3-fire" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-semibold shadow-sm transition">
+                Bắn vật thể
+              </button>
+              <button id="sim3-reset" class="px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition">
+                Đặt lại
+              </button>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-4 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-xl text-xs">
+            <div>
+              <div class="flex justify-between font-semibold mb-1">
+                <span>Vận tốc đầu (v₀):</span>
+                <span id="sim3-v0-val" class="text-rose-600 font-bold">25 m/s</span>
+              </div>
+              <input type="range" id="sim3-v0" min="10" max="40" step="1" value="25" class="w-full accent-rose-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-semibold mb-1">
+                <span>Góc ném (α):</span>
+                <span id="sim3-angle-val" class="text-indigo-600 font-bold">45° (Tầm xa max)</span>
+              </div>
+              <input type="range" id="sim3-angle" min="0" max="85" step="5" value="45" class="w-full accent-indigo-600">
+            </div>
+
+            <div>
+              <div class="flex justify-between font-semibold mb-1">
+                <span>Độ cao ném (H):</span>
+                <span id="sim3-h0-val" class="text-amber-600 font-bold">10 m</span>
+              </div>
+              <input type="range" id="sim3-h0" min="0" max="30" step="2" value="10" class="w-full accent-amber-600">
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Tầm cao cực đại (H_max)</span>
+              <span id="sim3-hmax" class="text-base font-extrabold text-indigo-600 font-mono">25.94 m</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Tầm xa (L)</span>
+              <span id="sim3-lmax" class="text-base font-extrabold text-emerald-600 font-mono">72.45 m</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
+              <span class="text-slate-400 block text-[10px] uppercase font-bold">Thời gian bay</span>
+              <span id="sim3-tflight" class="text-base font-extrabold text-slate-700 dark:text-slate-200 font-mono">4.10 s</span>
+            </div>
+          </div>
+
+          <!-- Canvas -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-2 overflow-hidden">
+            <canvas id="canvas-projectile" class="w-full h-[300px] block rounded-lg"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 4: SỔ TAY CÔNG THỨC (FORMULAS) ================= -->
+    <div id="tab-formulas" class="tab-content">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="glass-card rounded-2xl p-6 shadow-sm text-center">
+          <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Tra cứu nhanh</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">Sổ Tay Công Thức Toàn Chương Động Học</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Tổng hợp đầy đủ công thức, đơn vị chuẩn SI và điều kiện áp dụng.</p>
+        </div>
+
+        <div id="formula-sheet-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 5: THỐNG KÊ & TIẾN ĐỘ (STATS) ================= -->
+    <div id="tab-stats" class="tab-content">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="glass-card rounded-2xl p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Tiến Độ & Năng Lực Học Tập</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Theo dõi số bài lý thuyết đã hoàn thành, độ chính xác làm bài tập và ôn lại các câu hỏi đã làm sai.</p>
+        </div>
+
+        <div id="stats-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 py-6 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1">
+      <p class="font-semibold text-slate-700 dark:text-slate-300">Ứng dụng Học Lý Thuyết & Luyện Bài Tập Vật Lí 10</p>
+      <p>Biên soạn chuẩn theo SGK Vật lí 10 - Bộ sách Kết Nối Tri Thức Với Cuộc Sống (Chương II: Động học)</p>
+      <p class="text-[11px] text-slate-400">Tích hợp mô phỏng tương tác, ngân hàng câu hỏi nhận biết - thông hiểu - vận dụng và dạng đề mới 2025.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
