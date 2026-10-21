@@ -1008,13 +1008,29 @@ const App = {
     if (window.katex) {
       root.querySelectorAll('.katex-inline:not([data-rendered])').forEach(el => {
         try {
-          katex.render(el.textContent.trim(), el, { displayMode: false, throwOnError: false });
+          const formula = el.textContent.trim();
+          el.innerHTML = '';
+          el.classList.add('notranslate');
+          el.setAttribute('translate', 'no');
+          katex.render(formula, el, {
+            output: 'html',
+            displayMode: false,
+            throwOnError: false
+          });
           el.dataset.rendered = 'true';
         } catch(e) {}
       });
       root.querySelectorAll('.katex-display:not([data-rendered])').forEach(el => {
         try {
-          katex.render(el.textContent.trim(), el, { displayMode: true, throwOnError: false });
+          const formula = el.textContent.trim();
+          el.innerHTML = '';
+          el.classList.add('notranslate');
+          el.setAttribute('translate', 'no');
+          katex.render(formula, el, {
+            output: 'html',
+            displayMode: true,
+            throwOnError: false
+          });
           el.dataset.rendered = 'true';
         } catch(e) {}
       });

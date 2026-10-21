@@ -51,6 +51,18 @@ body {
   font-size: 1.08em;
 }
 
+/* Hide MathML tree to prevent duplicate rendering and translator interference */
+.katex-mathml, math {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.notranslate {
+  translate: no !important;
+}
+
 /* Animated badges & pulses */
 @keyframes pulse-subtle {
   0%, 100% { opacity: 1; transform: scale(1); }
