@@ -224,6 +224,10 @@ const App = {
       if (tabId === 'stats') {
         this.renderStats();
       }
+      if (tabId === 'formulas') {
+        const container = document.getElementById('formula-sheet-container');
+        if (container) this.renderMath(container);
+      }
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -328,7 +332,7 @@ const App = {
             ${lesson.formulas.map(f => `
               <div class="bg-slate-800/80 dark:bg-slate-900/80 p-3 rounded-xl border border-slate-700">
                 <div class="text-xs text-indigo-300 font-semibold mb-1">${f.name}</div>
-                <div class="text-base font-bold text-emerald-400 my-1"><span class="katex-display">${f.latex}</span></div>
+                <div class="text-base font-bold text-emerald-400 my-1"><span data-math="display">${f.latex}</span></div>
                 <div class="text-xs text-slate-400">${f.note}</div>
               </div>
             `).join('')}
@@ -900,7 +904,7 @@ const App = {
             <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
               <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">${item.name}</div>
               <div class="text-lg font-bold text-indigo-700 dark:text-indigo-300 my-1">
-                <span class="katex-display">${item.formula}</span>
+                <span data-math="display">${item.formula}</span>
               </div>
               <p class="text-xs text-slate-600 dark:text-slate-400 mt-2">${item.desc}</p>
             </div>
@@ -1007,9 +1011,14 @@ const App = {
     const root = container || document;
     const executeRender = () => {
       if (!window.katex) return false;
-      root.querySelectorAll('.katex-inline:not([data-rendered])').forEach(el => {
+
+      // Render inline formulas
+      root.querySelectorAll('[data-math="inline"]:not([data-rendered])').forEach(el => {
+        if (el.dataset.rendered || el.closest('[data-rendered="true"]')) return;
         try {
-          const formula = el.textContent.trim();
+          const formula = el.getAttribute('data-tex') || el.textContent.trim();
+          el.setAttribute('data-tex', formula);
+          el.dataset.rendered = 'true';
           el.innerHTML = '';
           el.classList.add('notranslate');
           el.setAttribute('translate', 'no');
@@ -1018,12 +1027,18 @@ const App = {
             displayMode: false,
             throwOnError: false
           });
-          el.dataset.rendered = 'true';
-        } catch(e) {}
+        } catch(e) {
+          console.error('KaTeX inline error:', e);
+        }
       });
-      root.querySelectorAll('.katex-display:not([data-rendered])').forEach(el => {
+
+      // Render display formulas
+      root.querySelectorAll('[data-math="display"]:not([data-rendered])').forEach(el => {
+        if (el.dataset.rendered || el.closest('[data-rendered="true"]')) return;
         try {
-          const formula = el.textContent.trim();
+          const formula = el.getAttribute('data-tex') || el.textContent.trim();
+          el.setAttribute('data-tex', formula);
+          el.dataset.rendered = 'true';
           el.innerHTML = '';
           el.classList.add('notranslate');
           el.setAttribute('translate', 'no');
@@ -1032,9 +1047,11 @@ const App = {
             displayMode: true,
             throwOnError: false
           });
-          el.dataset.rendered = 'true';
-        } catch(e) {}
+        } catch(e) {
+          console.error('KaTeX display error:', e);
+        }
       });
+
       return true;
     };
 
@@ -1046,7 +1063,6 @@ const App = {
           clearInterval(interval);
         }
       }, 50);
-      window.addEventListener('load', () => executeRender(), { once: true });
     }
   }
 };

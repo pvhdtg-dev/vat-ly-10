@@ -38,7 +38,7 @@ const LESSONS_DATA = [
       {
         title: "II. Độ dịch chuyển là gì?",
         content: `
-          <p class="mb-3">Độ dịch chuyển là một đại lượng vectơ, ký hiệu là <span class="katex-inline">\\vec{d}</span>:</p>
+          <p class="mb-3">Độ dịch chuyển là một đại lượng vectơ, ký hiệu là <span data-math="inline">\\vec{d}</span>:</p>
           <ul class="list-disc list-inside space-y-2 mb-4 text-slate-700 dark:text-slate-300">
             <li><strong>Gốc:</strong> Đặt tại vị trí ban đầu của vật.</li>
             <li><strong>Ngọn (mũi tên):</strong> Hướng tới vị trí cuối cùng của vật.</li>
@@ -63,7 +63,7 @@ const LESSONS_DATA = [
                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td class="font-medium p-3">Bản chất vật lý</td>
                   <td class="p-3">Đại lượng <strong>vô hướng</strong></td>
-                  <td class="p-3">Đại lượng <strong>vectơ</strong> (<span class="katex-inline">\\vec{d}</span>)</td>
+                  <td class="p-3">Đại lượng <strong>vectơ</strong> (<span data-math="inline">\\vec{d}</span>)</td>
                 </tr>
                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td class="font-medium p-3">Định nghĩa</td>
@@ -72,19 +72,19 @@ const LESSONS_DATA = [
                 </tr>
                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td class="font-medium p-3">Dấu và độ lớn</td>
-                  <td class="p-3">Luôn dương hoặc bằng 0 (<span class="katex-inline">s \\ge 0</span>)</td>
+                  <td class="p-3">Luôn dương hoặc bằng 0 (<span data-math="inline">s \\ge 0</span>)</td>
                   <td class="p-3">Có thể <strong>dương, âm hoặc bằng 0</strong> tuỳ trục tọa độ</td>
                 </tr>
                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                  <td class="font-medium p-3">Khi nào <span class="katex-inline">d = s</span>?</td>
+                  <td class="font-medium p-3">Khi nào <span data-math="inline">d = s</span>?</td>
                   <td colspan="2" class="p-3 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-300 font-semibold">
                     Khi và chỉ khi vật <strong>chuyển động thẳng</strong> và <strong>không đổi chiều</strong>.
                   </td>
                 </tr>
                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                   <td class="font-medium p-3">Vật quay lại điểm xuất phát</td>
-                  <td class="p-3"><span class="katex-inline">s > 0</span> (tổng vòng đi)</td>
-                  <td class="p-3 font-bold text-rose-600"><span class="katex-inline">d = 0</span> (vị trí đầu trùng vị trí cuối)</td>
+                  <td class="p-3"><span data-math="inline">s > 0</span> (tổng vòng đi)</td>
+                  <td class="p-3 font-bold text-rose-600"><span data-math="inline">d = 0</span> (vị trí đầu trùng vị trí cuối)</td>
                 </tr>
               </tbody>
             </table>
@@ -94,22 +94,22 @@ const LESSONS_DATA = [
       {
         title: "IV. Tổng hợp độ dịch chuyển",
         content: `
-          <p class="mb-3">Khi một vật thực hiện liên tiếp các độ dịch chuyển <span class="katex-inline">\\vec{d}_1, \\vec{d}_2</span>, độ dịch chuyển tổng hợp là:</p>
+          <p class="mb-3">Khi một vật thực hiện liên tiếp các độ dịch chuyển <span data-math="inline">\\vec{d}_1, \\vec{d}_2</span>, độ dịch chuyển tổng hợp là:</p>
           <div class="text-center my-3 p-3 bg-indigo-50 dark:bg-indigo-950/50 rounded-lg text-lg font-bold text-indigo-700 dark:text-indigo-300">
-            <span class="katex-display">\\vec{d} = \\vec{d}_1 + \\vec{d}_2</span>
+            <span data-math="display">\\vec{d} = \\vec{d}_1 + \\vec{d}_2</span>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-4">
             <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
               <span class="font-bold text-emerald-600">Cùng hướng:</span>
-              <p class="text-sm mt-1"><span class="katex-inline">d = d_1 + d_2</span></p>
+              <p class="text-sm mt-1"><span data-math="inline">d = d_1 + d_2</span></p>
             </div>
             <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
               <span class="font-bold text-rose-600">Ngược hướng:</span>
-              <p class="text-sm mt-1"><span class="katex-inline">d = |d_1 - d_2|</span></p>
+              <p class="text-sm mt-1"><span data-math="inline">d = |d_1 - d_2|</span></p>
             </div>
             <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
               <span class="font-bold text-indigo-600">Vuông góc:</span>
-              <p class="text-sm mt-1"><span class="katex-inline">d = \\sqrt{d_1^2 + d_2^2}</span></p>
+              <p class="text-sm mt-1"><span data-math="inline">d = \\sqrt{d_1^2 + d_2^2}</span></p>
             </div>
           </div>
         `
@@ -146,7 +146,7 @@ const LESSONS_DATA = [
           <div class="space-y-3">
             <p><strong>1. Tốc độ trung bình:</strong> Là thương số giữa quãng đường đi được và thời gian dùng để đi hết quãng đường đó.</p>
             <div class="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-lg text-center font-bold">
-              <span class="katex-display">v = \\frac{s}{t} = \\frac{\\Delta s}{\\Delta t}</span>
+              <span data-math="display">v = \\frac{s}{t} = \\frac{\\Delta s}{\\Delta t}</span>
             </div>
             <p class="text-sm text-slate-600 dark:text-slate-400">Đặc trưng cho mức độ nhanh hay chậm của chuyển động. Luôn mang giá trị dương.</p>
             <p><strong>2. Tốc độ tức thời:</strong> Là tốc độ tại một thời điểm xác định. Dụng cụ đo trực tiếp trên xe là <strong>tốc kế</strong> (đồng hồ tốc độ).</p>
@@ -159,7 +159,7 @@ const LESSONS_DATA = [
           <div class="space-y-3">
             <p><strong>1. Vận tốc trung bình:</strong> Là đại lượng vectơ được xác định bằng thương số giữa độ dịch chuyển và khoảng thời gian thực hiện độ dịch chuyển đó:</p>
             <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg text-center font-bold">
-              <span class="katex-display">\\vec{v} = \\frac{\\vec{d}}{t} = \\frac{\\Delta \\vec{d}}{\\Delta t}</span>
+              <span data-math="display">\\vec{v} = \\frac{\\vec{d}}{t} = \\frac{\\Delta \\vec{d}}{\\Delta t}</span>
             </div>
             <p><strong>2. Vectơ vận tốc:</strong></p>
             <ul class="list-disc list-inside text-sm space-y-1 text-slate-700 dark:text-slate-300">
@@ -168,7 +168,7 @@ const LESSONS_DATA = [
               <li>Độ dài tỉ lệ với độ lớn của vận tốc.</li>
             </ul>
             <div class="bg-amber-50 dark:bg-amber-950/40 p-3 rounded-lg border-l-4 border-amber-500 text-sm">
-              <strong>Lưu ý cốt lõi:</strong> Khi vật chuyển động thẳng không đổi chiều theo chiều dương, tốc độ trung bình và vận tốc có độ lớn bằng nhau: <span class="katex-inline">v = |\\vec{v}|</span>. Khi vật đi ngược chiều dương, vận tốc mang giá trị âm (<span class="katex-inline">v < 0</span>).
+              <strong>Lưu ý cốt lõi:</strong> Khi vật chuyển động thẳng không đổi chiều theo chiều dương, tốc độ trung bình và vận tốc có độ lớn bằng nhau: <span data-math="inline">v = |\\vec{v}|</span>. Khi vật đi ngược chiều dương, vận tốc mang giá trị âm (<span data-math="inline">v < 0</span>).
             </div>
           </div>
         `
@@ -178,22 +178,22 @@ const LESSONS_DATA = [
         content: `
           <p class="mb-3">Xét vật (1) chuyển động so với hệ quy chiếu chuyển động (2), và (2) chuyển động so với hệ quy chiếu đứng yên (3):</p>
           <div class="p-4 bg-purple-50 dark:bg-purple-950/40 rounded-lg text-center font-bold text-lg text-purple-900 dark:text-purple-200">
-            <span class="katex-display">\\vec{v}_{1,3} = \\vec{v}_{1,2} + \\vec{v}_{2,3}</span>
+            <span data-math="display">\\vec{v}_{1,3} = \\vec{v}_{1,2} + \\vec{v}_{2,3}</span>
           </div>
           <ul class="list-disc list-inside text-sm space-y-2 mt-3 text-slate-700 dark:text-slate-300">
-            <li><span class="katex-inline">\\vec{v}_{1,3}</span>: Vận tốc <strong>tuyệt đối</strong> (vật đối với hệ đứng yên, ví dụ: thuyền đối với bờ).</li>
-            <li><span class="katex-inline">\\vec{v}_{1,2}</span>: Vận tốc <strong>tương đối</strong> (vật đối với hệ chuyển động, ví dụ: thuyền đối với dòng nước).</li>
-            <li><span class="katex-inline">\\vec{v}_{2,3}</span>: Vận tốc <strong>kéo theo</strong> (hệ chuyển động đối với hệ đứng yên, ví dụ: dòng nước đối với bờ).</li>
+            <li><span data-math="inline">\\vec{v}_{1,3}</span>: Vận tốc <strong>tuyệt đối</strong> (vật đối với hệ đứng yên, ví dụ: thuyền đối với bờ).</li>
+            <li><span data-math="inline">\\vec{v}_{1,2}</span>: Vận tốc <strong>tương đối</strong> (vật đối với hệ chuyển động, ví dụ: thuyền đối với dòng nước).</li>
+            <li><span data-math="inline">\\vec{v}_{2,3}</span>: Vận tốc <strong>kéo theo</strong> (hệ chuyển động đối với hệ đứng yên, ví dụ: dòng nước đối với bờ).</li>
           </ul>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3 text-sm">
             <div class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded">
-              <strong>Xuôi dòng / Cùng hướng:</strong><br><span class="katex-inline">v_{1,3} = v_{1,2} + v_{2,3}</span>
+              <strong>Xuôi dòng / Cùng hướng:</strong><br><span data-math="inline">v_{1,3} = v_{1,2} + v_{2,3}</span>
             </div>
             <div class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded">
-              <strong>Ngược dòng / Ngược hướng:</strong><br><span class="katex-inline">v_{1,3} = |v_{1,2} - v_{2,3}|</span>
+              <strong>Ngược dòng / Ngược hướng:</strong><br><span data-math="inline">v_{1,3} = |v_{1,2} - v_{2,3}|</span>
             </div>
             <div class="p-2.5 bg-slate-100 dark:bg-slate-800 rounded">
-              <strong>Vuông góc:</strong><br><span class="katex-inline">v_{1,3} = \\sqrt{v_{1,2}^2 + v_{2,3}^2}</span>
+              <strong>Vuông góc:</strong><br><span data-math="inline">v_{1,3} = \\sqrt{v_{1,2}^2 + v_{2,3}^2}</span>
             </div>
           </div>
         `
@@ -247,19 +247,19 @@ const LESSONS_DATA = [
           <div class="space-y-3">
             <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-lg border border-slate-200 dark:border-slate-700">
               <h5 class="font-bold text-indigo-600 dark:text-indigo-400">1. Đo tốc độ trung bình qua 2 cổng quang E và F:</h5>
-              <p class="text-sm mt-1">Đo khoảng cách <span class="katex-inline">s = EF</span> bằng thước trên máng. Đo thời gian <span class="katex-inline">t</span> từ E sang F (chế độ A ↔ B).</p>
-              <p class="text-sm font-semibold mt-1">Công thức: <span class="katex-inline">v_{tb} = \\frac{s}{t}</span></p>
+              <p class="text-sm mt-1">Đo khoảng cách <span data-math="inline">s = EF</span> bằng thước trên máng. Đo thời gian <span data-math="inline">t</span> từ E sang F (chế độ A ↔ B).</p>
+              <p class="text-sm font-semibold mt-1">Công thức: <span data-math="inline">v_{tb} = \\frac{s}{t}</span></p>
             </div>
             <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-lg border border-slate-200 dark:border-slate-700">
               <h5 class="font-bold text-indigo-600 dark:text-indigo-400">2. Đo tốc độ tức thời tại một cổng quang:</h5>
-              <p class="text-sm mt-1">Dùng thước kẹp đo đường kính viên bi <span class="katex-inline">d</span>. Cho bi qua cổng quang ở chế độ MODE A đo thời gian chắn sáng <span class="katex-inline">\\Delta t</span>.</p>
-              <p class="text-sm font-semibold mt-1">Công thức: <span class="katex-inline">v_t = \\frac{d}{\\Delta t}</span></p>
+              <p class="text-sm mt-1">Dùng thước kẹp đo đường kính viên bi <span data-math="inline">d</span>. Cho bi qua cổng quang ở chế độ MODE A đo thời gian chắn sáng <span data-math="inline">\\Delta t</span>.</p>
+              <p class="text-sm font-semibold mt-1">Công thức: <span data-math="inline">v_t = \\frac{d}{\\Delta t}</span></p>
             </div>
             <div class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-lg border border-amber-200 dark:border-amber-800 text-sm">
               <h5 class="font-bold text-amber-800 dark:text-amber-300">3. Công thức sai số phép đo:</h5>
-              <p class="mt-1">Sai số tỉ đối: <span class="katex-inline">\\delta v = \\frac{\\Delta v}{\\bar{v}} = \\frac{\\Delta s}{\\bar{s}} + \\frac{\\Delta t}{\\bar{t}}</span></p>
-              <p class="mt-1">Sai số tuyệt đối: <span class="katex-inline">\\Delta v = \\bar{v} \\times \\delta v</span></p>
-              <p class="mt-1">Kết quả đo: <span class="katex-inline">v = \\bar{v} \\pm \\Delta v</span> (kèm đơn vị).</p>
+              <p class="mt-1">Sai số tỉ đối: <span data-math="inline">\\delta v = \\frac{\\Delta v}{\\bar{v}} = \\frac{\\Delta s}{\\bar{s}} + \\frac{\\Delta t}{\\bar{t}}</span></p>
+              <p class="mt-1">Sai số tuyệt đối: <span data-math="inline">\\Delta v = \\bar{v} \\times \\delta v</span></p>
+              <p class="mt-1">Kết quả đo: <span data-math="inline">v = \\bar{v} \\pm \\Delta v</span> (kèm đơn vị).</p>
             </div>
           </div>
         `
@@ -291,19 +291,19 @@ const LESSONS_DATA = [
       {
         title: "I. Dạng đồ thị d - t trong chuyển động thẳng đều",
         content: `
-          <p class="mb-3">Phương trình độ dịch chuyển: <span class="katex-inline">d = v \\cdot t</span> (hàm bậc nhất dạng <span class="katex-inline">y = ax</span>).</p>
+          <p class="mb-3">Phương trình độ dịch chuyển: <span data-math="inline">d = v \\cdot t</span> (hàm bậc nhất dạng <span data-math="inline">y = ax</span>).</p>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
             <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 rounded-lg">
               <strong class="text-emerald-700 dark:text-emerald-300">Đường dốc lên (độ dốc > 0):</strong>
-              <p class="mt-1">Vật chuyển động thẳng đều theo chiều dương (<span class="katex-inline">v > 0</span>).</p>
+              <p class="mt-1">Vật chuyển động thẳng đều theo chiều dương (<span data-math="inline">v > 0</span>).</p>
             </div>
             <div class="p-3 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg">
               <strong class="text-slate-700 dark:text-slate-300">Đoạn nằm ngang (độ dốc = 0):</strong>
-              <p class="mt-1">Vị trí không thay đổi theo thời gian <span class="katex-inline">\\implies</span> Vật đang <strong>đứng yên</strong> (<span class="katex-inline">v = 0</span>).</p>
+              <p class="mt-1">Vị trí không thay đổi theo thời gian <span data-math="inline">\\implies</span> Vật đang <strong>đứng yên</strong> (<span data-math="inline">v = 0</span>).</p>
             </div>
             <div class="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 rounded-lg">
               <strong class="text-rose-700 dark:text-rose-300">Đường dốc xuống (độ dốc < 0):</strong>
-              <p class="mt-1">Vật chuyển động thẳng đều theo chiều âm (<span class="katex-inline">v < 0</span>, quay về gốc).</p>
+              <p class="mt-1">Vật chuyển động thẳng đều theo chiều âm (<span data-math="inline">v < 0</span>, quay về gốc).</p>
             </div>
           </div>
         `
@@ -313,7 +313,7 @@ const LESSONS_DATA = [
         content: `
           <p class="mb-3">Độ dốc của đường thẳng trên đồ thị độ dịch chuyển - thời gian chính là <strong>vận tốc</strong> của vật:</p>
           <div class="p-4 bg-indigo-50 dark:bg-indigo-950/50 rounded-lg text-center font-bold text-lg text-indigo-800 dark:text-indigo-300">
-            <span class="katex-display">v = \\text{Độ dốc} = \\frac{\\Delta d}{\\Delta t} = \\frac{d_2 - d_1}{t_2 - t_1}</span>
+            <span data-math="display">v = \\text{Độ dốc} = \\frac{\\Delta d}{\\Delta t} = \\frac{d_2 - d_1}{t_2 - t_1}</span>
           </div>
           <p class="text-sm mt-3 text-slate-700 dark:text-slate-300">
             Đường biểu diễn càng dốc đứng thì độ lớn vận tốc của vật càng lớn (chuyển động càng nhanh).
@@ -354,28 +354,28 @@ const LESSONS_DATA = [
         content: `
           <p class="mb-3">Gia tốc là đại lượng vật lý đặc trưng cho sự <strong>thay đổi nhanh hay chậm của vận tốc</strong> theo thời gian:</p>
           <div class="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-lg text-center font-bold">
-            <span class="katex-display">a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_t - v_0}{t - t_0}</span>
+            <span data-math="display">a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_t - v_0}{t - t_0}</span>
           </div>
           <p class="text-sm mt-2 text-slate-700 dark:text-slate-300">
-            <strong>Đơn vị đo trong hệ SI:</strong> mét trên giây bình phương, ký hiệu là <span class="katex-inline">\\text{m/s}^2</span> (hoặc <span class="katex-inline">\\text{m}\\cdot\\text{s}^{-2}</span>).
+            <strong>Đơn vị đo trong hệ SI:</strong> mét trên giây bình phương, ký hiệu là <span data-math="inline">\\text{m/s}^2</span> (hoặc <span data-math="inline">\\text{m}\\cdot\\text{s}^{-2}</span>).
           </p>
         `
       },
       {
         title: "III. Bản chất vectơ và Quy tắc dấu của Gia tốc",
         content: `
-          <p class="mb-2">Gia tốc là một đại lượng vectơ: <span class="katex-inline">\\vec{a} = \\frac{\\Delta \\vec{v}}{\\Delta t}</span>.</p>
+          <p class="mb-2">Gia tốc là một đại lượng vectơ: <span data-math="inline">\\vec{a} = \\frac{\\Delta \\vec{v}}{\\Delta t}</span>.</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-sm">
             <div class="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 rounded-lg">
               <h5 class="font-bold text-emerald-800 dark:text-emerald-300 text-base mb-1">Chuyển động NHANH DẦN:</h5>
-              <p>Vectơ gia tốc <span class="katex-inline">\\vec{a}</span> <strong>cùng chiều</strong> với vectơ vận tốc <span class="katex-inline">\\vec{v}</span>.</p>
+              <p>Vectơ gia tốc <span data-math="inline">\\vec{a}</span> <strong>cùng chiều</strong> với vectơ vận tốc <span data-math="inline">\\vec{v}</span>.</p>
               <div class="mt-2 font-mono font-bold text-emerald-700 dark:text-emerald-300 text-center bg-white dark:bg-slate-900 p-2 rounded">
                 a và v CÙNG DẤU: a · v > 0
               </div>
             </div>
             <div class="p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 rounded-lg">
               <h5 class="font-bold text-rose-800 dark:text-rose-300 text-base mb-1">Chuyển động CHẬM DẦN:</h5>
-              <p>Vectơ gia tốc <span class="katex-inline">\\vec{a}</span> <strong>ngược chiều</strong> với vectơ vận tốc <span class="katex-inline">\\vec{v}</span>.</p>
+              <p>Vectơ gia tốc <span data-math="inline">\\vec{a}</span> <strong>ngược chiều</strong> với vectơ vận tốc <span data-math="inline">\\vec{v}</span>.</p>
               <div class="mt-2 font-mono font-bold text-rose-700 dark:text-rose-300 text-center bg-white dark:bg-slate-900 p-2 rounded">
                 a và v TRÁI DẤU: a · v < 0
               </div>
@@ -410,10 +410,10 @@ const LESSONS_DATA = [
       {
         title: "I. Định nghĩa",
         content: `
-          <p class="mb-3">Chuyển động thẳng biến đổi đều là chuyển động thẳng có <strong>gia tốc không đổi theo thời gian</strong> (<span class="katex-inline">a = \\text{hằng số}</span>).</p>
+          <p class="mb-3">Chuyển động thẳng biến đổi đều là chuyển động thẳng có <strong>gia tốc không đổi theo thời gian</strong> (<span data-math="inline">a = \\text{hằng số}</span>).</p>
           <ul class="list-disc list-inside text-sm space-y-1 text-slate-700 dark:text-slate-300">
-            <li><strong>Chuyển động thẳng nhanh dần đều:</strong> Vận tốc có độ lớn tăng đều theo thời gian (<span class="katex-inline">a \\cdot v > 0</span>).</li>
-            <li><strong>Chuyển động thẳng chậm dần đều:</strong> Vận tốc có độ lớn giảm đều theo thời gian (<span class="katex-inline">a \\cdot v < 0</span>).</li>
+            <li><strong>Chuyển động thẳng nhanh dần đều:</strong> Vận tốc có độ lớn tăng đều theo thời gian (<span data-math="inline">a \\cdot v > 0</span>).</li>
+            <li><strong>Chuyển động thẳng chậm dần đều:</strong> Vận tốc có độ lớn giảm đều theo thời gian (<span data-math="inline">a \\cdot v < 0</span>).</li>
           </ul>
         `
       },
@@ -424,7 +424,7 @@ const LESSONS_DATA = [
             <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 rounded-lg flex items-center justify-between">
               <div>
                 <span class="text-xs uppercase font-bold text-indigo-600 dark:text-indigo-400">1. Vận tốc tức thời:</span>
-                <div class="font-bold text-lg"><span class="katex-display">v_t = v_0 + a \\cdot t</span></div>
+                <div class="font-bold text-lg"><span data-math="display">v_t = v_0 + a \\cdot t</span></div>
               </div>
               <span class="text-xs text-slate-500 max-w-xs text-right hidden sm:block">Biết vận tốc tại bất kỳ thời điểm t</span>
             </div>
@@ -432,7 +432,7 @@ const LESSONS_DATA = [
             <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg flex items-center justify-between">
               <div>
                 <span class="text-xs uppercase font-bold text-emerald-600 dark:text-emerald-400">2. Độ dịch chuyển:</span>
-                <div class="font-bold text-lg"><span class="katex-display">d = v_0 t + \\frac{1}{2} a t^2</span></div>
+                <div class="font-bold text-lg"><span data-math="display">d = v_0 t + \\frac{1}{2} a t^2</span></div>
               </div>
               <span class="text-xs text-slate-500 max-w-xs text-right hidden sm:block">Chứng minh từ diện tích hình thang dưới đồ thị v-t</span>
             </div>
@@ -440,7 +440,7 @@ const LESSONS_DATA = [
             <div class="p-3 bg-rose-50 dark:bg-rose-950/40 rounded-lg flex items-center justify-between">
               <div>
                 <span class="text-xs uppercase font-bold text-rose-600 dark:text-rose-400">3. Công thức độc lập thời gian:</span>
-                <div class="font-bold text-lg"><span class="katex-display">v_t^2 - v_0^2 = 2 a d</span></div>
+                <div class="font-bold text-lg"><span data-math="display">v_t^2 - v_0^2 = 2 a d</span></div>
               </div>
               <span class="text-xs text-slate-500 max-w-xs text-right hidden sm:block">Dùng khi không cho hoặc không cần tìm thời gian t</span>
             </div>
@@ -448,7 +448,7 @@ const LESSONS_DATA = [
             <div class="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-lg flex items-center justify-between">
               <div>
                 <span class="text-xs uppercase font-bold text-purple-600 dark:text-purple-400">4. Quãng đường đi được:</span>
-                <div class="font-bold text-lg"><span class="katex-display">s = |v_0 t + \\frac{1}{2} a t^2|</span></div>
+                <div class="font-bold text-lg"><span data-math="display">s = |v_0 t + \\frac{1}{2} a t^2|</span></div>
               </div>
               <span class="text-xs text-slate-500 max-w-xs text-right hidden sm:block">Nếu không đổi chiều: s = d</span>
             </div>
@@ -459,8 +459,8 @@ const LESSONS_DATA = [
         title: "III. Đồ thị vận tốc – thời gian (v - t)",
         content: `
           <ul class="list-disc list-inside text-sm space-y-2 text-slate-700 dark:text-slate-300">
-            <li>Đồ thị <span class="katex-inline">v - t</span> là một đường thẳng xiên góc.</li>
-            <li><strong>Độ dốc của đường thẳng:</strong> <span class="katex-inline">\\text{Độ dốc} = \\frac{\\Delta v}{\\Delta t} = a</span> (chính là gia tốc).</li>
+            <li>Đồ thị <span data-math="inline">v - t</span> là một đường thẳng xiên góc.</li>
+            <li><strong>Độ dốc của đường thẳng:</strong> <span data-math="inline">\\text{Độ dốc} = \\frac{\\Delta v}{\\Delta t} = a</span> (chính là gia tốc).</li>
             <li><strong>Ý nghĩa diện tích:</strong> Diện tích của hình phẳng giới hạn bởi đồ thị vận tốc - thời gian và trục hoành trong khoảng thời gian t chính là <strong>độ dịch chuyển d</strong> của vật.</li>
           </ul>
         `
@@ -512,8 +512,8 @@ const LESSONS_DATA = [
           <ul class="list-disc list-inside text-sm space-y-1 text-slate-700 dark:text-slate-300">
             <li><strong>Phương:</strong> Thẳng đứng (trùng với phương dây dọi).</li>
             <li><strong>Chiều:</strong> Từ trên xuống dưới.</li>
-            <li><strong>Tính chất:</strong> Là chuyển động <strong>thẳng nhanh dần đều</strong> không có vận tốc ban đầu (<span class="katex-inline">v_0 = 0</span>).</li>
-            <li><strong>Gia tốc:</strong> Mọi vật rơi tự do tại cùng một nơi trên Trái Đất đều có cùng gia tốc trọng trường <span class="katex-inline">g</span>. Ở gần mặt đất, thường lấy <span class="katex-inline">g \\approx 9,8\\text{ m/s}^2</span> hoặc <span class="katex-inline">g = 10\\text{ m/s}^2</span>.</li>
+            <li><strong>Tính chất:</strong> Là chuyển động <strong>thẳng nhanh dần đều</strong> không có vận tốc ban đầu (<span data-math="inline">v_0 = 0</span>).</li>
+            <li><strong>Gia tốc:</strong> Mọi vật rơi tự do tại cùng một nơi trên Trái Đất đều có cùng gia tốc trọng trường <span data-math="inline">g</span>. Ở gần mặt đất, thường lấy <span data-math="inline">g \\approx 9,8\\text{ m/s}^2</span> hoặc <span data-math="inline">g = 10\\text{ m/s}^2</span>.</li>
           </ul>
         `
       },
@@ -523,19 +523,19 @@ const LESSONS_DATA = [
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center my-3">
             <div class="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-lg">
               <span class="text-xs text-blue-700 dark:text-blue-300 font-bold block mb-1">VẬN TỐC TỨC THỜI</span>
-              <span class="katex-display">v = g \\cdot t</span>
+              <span data-math="display">v = g \\cdot t</span>
             </div>
             <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg">
               <span class="text-xs text-emerald-700 dark:text-emerald-300 font-bold block mb-1">QUÃNG ĐƯỜNG RƠI</span>
-              <span class="katex-display">h = \\frac{1}{2} g t^2</span>
+              <span data-math="display">h = \\frac{1}{2} g t^2</span>
             </div>
             <div class="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-lg">
               <span class="text-xs text-purple-700 dark:text-purple-300 font-bold block mb-1">HỆ THỨC ĐỘC LẬP t</span>
-              <span class="katex-display">v^2 = 2 g h</span>
+              <span data-math="display">v^2 = 2 g h</span>
             </div>
           </div>
           <div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg text-sm">
-            <strong>Hệ quả quan trọng:</strong> Thời gian vật rơi từ độ cao h chạm đất là <span class="katex-inline">t = \\sqrt{\\frac{2h}{g}}</span>; vận tốc lúc chạm đất là <span class="katex-inline">v = \\sqrt{2gh}</span>.
+            <strong>Hệ quả quan trọng:</strong> Thời gian vật rơi từ độ cao h chạm đất là <span data-math="inline">t = \\sqrt{\\frac{2h}{g}}</span>; vận tốc lúc chạm đất là <span data-math="inline">v = \\sqrt{2gh}</span>.
           </div>
         `
       }
@@ -570,7 +570,7 @@ const LESSONS_DATA = [
           <ul class="list-disc list-inside space-y-2 text-sm text-slate-700 dark:text-slate-300">
             <li><strong>Máng đứng có dây dọi:</strong> Đảm bảo phương rơi của trụ thép hoàn toàn thẳng đứng.</li>
             <li><strong>Nam châm điện:</strong> Giữ trụ thép tại vị trí xuất phát và thả không vận tốc đầu khi ngắt điện.</li>
-            <li><strong>Cổng quang điện E:</strong> Đặt ở khoảng cách <span class="katex-inline">s</span> bên dưới nam châm điện.</li>
+            <li><strong>Cổng quang điện E:</strong> Đặt ở khoảng cách <span data-math="inline">s</span> bên dưới nam châm điện.</li>
             <li><strong>Đồng hồ hiện số MC-964:</strong> Bắt đầu đếm khi nam châm ngắt điện và dừng đếm khi đáy trụ thép đi qua cổng quang.</li>
           </ul>
         `
@@ -578,10 +578,10 @@ const LESSONS_DATA = [
       {
         title: "II. Công thức tính và Đồ thị s - t²",
         content: `
-          <p class="text-sm mb-2">Vì vật rơi tự do không vận tốc ban đầu nên: <span class="katex-inline">s = \\frac{1}{2} g t^2 \\implies g = \\frac{2s}{t^2}</span>.</p>
+          <p class="text-sm mb-2">Vì vật rơi tự do không vận tốc ban đầu nên: <span data-math="inline">s = \\frac{1}{2} g t^2 \\implies g = \\frac{2s}{t^2}</span>.</p>
           <div class="bg-blue-50 dark:bg-blue-950/40 p-4 rounded-lg border-l-4 border-blue-500 text-sm">
             <h5 class="font-bold text-blue-900 dark:text-blue-300 mb-1">Phương pháp xử lý đồ thị s theo t²:</h5>
-            <p>Vẽ đồ thị với trục tung là <span class="katex-inline">s</span> và trục hoành là <span class="katex-inline">t^2</span>. Đồ thị thu được là một <strong>đường thẳng đi qua gốc toạ độ</strong>. Hệ số góc của đường thẳng chính là <span class="katex-inline">k = \\frac{g}{2}</span>. Từ đó suy ra <span class="katex-inline">g = 2k</span>.</p>
+            <p>Vẽ đồ thị với trục tung là <span data-math="inline">s</span> và trục hoành là <span data-math="inline">t^2</span>. Đồ thị thu được là một <strong>đường thẳng đi qua gốc toạ độ</strong>. Hệ số góc của đường thẳng chính là <span data-math="inline">k = \\frac{g}{2}</span>. Từ đó suy ra <span data-math="inline">g = 2k</span>.</p>
           </div>
         `
       }
@@ -615,27 +615,27 @@ const LESSONS_DATA = [
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-3 text-sm">
             <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg">
               <h5 class="font-bold text-indigo-600 dark:text-indigo-400 mb-1">1. Theo phương ngang Ox:</h5>
-              <p>Không có lực tác dụng (<span class="katex-inline">a_x = 0</span>) <span class="katex-inline">\\implies</span> Chuyển động thẳng đều:</p>
-              <p class="font-mono mt-1"><span class="katex-inline">v_x = v_0</span>, <span class="katex-inline">x = v_0 \\cdot t</span></p>
+              <p>Không có lực tác dụng (<span data-math="inline">a_x = 0</span>) <span data-math="inline">\\implies</span> Chuyển động thẳng đều:</p>
+              <p class="font-mono mt-1"><span data-math="inline">v_x = v_0</span>, <span data-math="inline">x = v_0 \\cdot t</span></p>
             </div>
             <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg">
               <h5 class="font-bold text-indigo-600 dark:text-indigo-400 mb-1">2. Theo phương thẳng đứng Oy:</h5>
-              <p>Chỉ chịu trọng lực (<span class="katex-inline">a_y = g</span>, <span class="katex-inline">v_{0y} = 0</span>) <span class="katex-inline">\\implies</span> Rơi tự do:</p>
-              <p class="font-mono mt-1"><span class="katex-inline">v_y = g \\cdot t</span>, <span class="katex-inline">y = \\frac{1}{2} g t^2</span></p>
+              <p>Chỉ chịu trọng lực (<span data-math="inline">a_y = g</span>, <span data-math="inline">v_{0y} = 0</span>) <span data-math="inline">\\implies</span> Rơi tự do:</p>
+              <p class="font-mono mt-1"><span data-math="inline">v_y = g \\cdot t</span>, <span data-math="inline">y = \\frac{1}{2} g t^2</span></p>
             </div>
           </div>
           <div class="bg-indigo-50 dark:bg-indigo-950/40 p-4 rounded-lg space-y-2 text-sm">
-            <p><strong>Quỹ đạo:</strong> Khử thời gian t ta có <span class="katex-inline">y = \\frac{g}{2v_0^2} x^2</span> <span class="katex-inline">\\implies</span> Quỹ đạo là một nhánh parabol đỉnh O.</p>
-            <p><strong>Thời gian rơi chạm đất:</strong> <span class="katex-inline">t = \\sqrt{\\frac{2H}{g}}</span> (chỉ phụ thuộc vào độ cao H, không phụ thuộc vào <span class="katex-inline">v_0</span>!).</p>
-            <p><strong>Tầm ném xa:</strong> <span class="katex-inline">L = x_{\\max} = v_0 \\cdot t = v_0 \\sqrt{\\frac{2H}{g}}</span>.</p>
-            <p><strong>Vận tốc chạm đất:</strong> <span class="katex-inline">v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{v_0^2 + 2gH}</span>.</p>
+            <p><strong>Quỹ đạo:</strong> Khử thời gian t ta có <span data-math="inline">y = \\frac{g}{2v_0^2} x^2</span> <span data-math="inline">\\implies</span> Quỹ đạo là một nhánh parabol đỉnh O.</p>
+            <p><strong>Thời gian rơi chạm đất:</strong> <span data-math="inline">t = \\sqrt{\\frac{2H}{g}}</span> (chỉ phụ thuộc vào độ cao H, không phụ thuộc vào <span data-math="inline">v_0</span>!).</p>
+            <p><strong>Tầm ném xa:</strong> <span data-math="inline">L = x_{\\max} = v_0 \\cdot t = v_0 \\sqrt{\\frac{2H}{g}}</span>.</p>
+            <p><strong>Vận tốc chạm đất:</strong> <span data-math="inline">v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{v_0^2 + 2gH}</span>.</p>
           </div>
         `
       },
       {
         title: "II. Chuyển động ném xiên (Góc ném α)",
         content: `
-          <p class="mb-3">Vật được ném với vận tốc <span class="katex-inline">v_0</span> hợp với phương ngang góc <span class="katex-inline">\\alpha</span> từ mặt đất:</p>
+          <p class="mb-3">Vật được ném với vận tốc <span data-math="inline">v_0</span> hợp với phương ngang góc <span data-math="inline">\\alpha</span> từ mặt đất:</p>
           <div class="overflow-x-auto my-3">
             <table class="w-full text-sm border-collapse border border-slate-300 dark:border-slate-700">
               <tr class="bg-slate-100 dark:bg-slate-800">
@@ -645,23 +645,23 @@ const LESSONS_DATA = [
               </tr>
               <tr>
                 <td class="p-2 border font-medium">Vận tốc ban đầu</td>
-                <td class="p-2 border"><span class="katex-inline">v_{0x} = v_0 \\cos\\alpha</span>; <span class="katex-inline">v_{0y} = v_0 \\sin\\alpha</span></td>
+                <td class="p-2 border"><span data-math="inline">v_{0x} = v_0 \\cos\\alpha</span>; <span data-math="inline">v_{0y} = v_0 \\sin\\alpha</span></td>
                 <td class="p-2 border">Chiếu lên 2 trục</td>
               </tr>
               <tr>
                 <td class="p-2 border font-medium">Tầm cao cực đại (H)</td>
-                <td class="p-2 border font-bold text-indigo-600"><span class="katex-inline">H = \\frac{v_0^2 \\sin^2\\alpha}{2g}</span></td>
-                <td class="p-2 border">Khi <span class="katex-inline">v_y = 0</span> tại đỉnh parabol</td>
+                <td class="p-2 border font-bold text-indigo-600"><span data-math="inline">H = \\frac{v_0^2 \\sin^2\\alpha}{2g}</span></td>
+                <td class="p-2 border">Khi <span data-math="inline">v_y = 0</span> tại đỉnh parabol</td>
               </tr>
               <tr>
                 <td class="p-2 border font-medium">Thời gian lên tới đỉnh</td>
-                <td class="p-2 border"><span class="katex-inline">t_H = \\frac{v_0 \\sin\\alpha}{g}</span></td>
-                <td class="p-2 border">Thời gian bay tổng: <span class="katex-inline">T = 2 t_H</span></td>
+                <td class="p-2 border"><span data-math="inline">t_H = \\frac{v_0 \\sin\\alpha}{g}</span></td>
+                <td class="p-2 border">Thời gian bay tổng: <span data-math="inline">T = 2 t_H</span></td>
               </tr>
               <tr>
                 <td class="p-2 border font-medium">Tầm ném xa (L)</td>
-                <td class="p-2 border font-bold text-emerald-600"><span class="katex-inline">L = \\frac{v_0^2 \\sin 2\\alpha}{g}</span></td>
-                <td class="p-2 border">Đạt cực đại khi <span class="katex-inline">\\alpha = 45^\\circ</span> (<span class="katex-inline">\\sin 2\\alpha = 1</span>)</td>
+                <td class="p-2 border font-bold text-emerald-600"><span data-math="inline">L = \\frac{v_0^2 \\sin 2\\alpha}{g}</span></td>
+                <td class="p-2 border">Đạt cực đại khi <span data-math="inline">\\alpha = 45^\\circ</span> (<span data-math="inline">\\sin 2\\alpha = 1</span>)</td>
               </tr>
             </table>
           </div>
