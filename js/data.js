@@ -1253,3 +1253,402 @@ const FORMULA_SHEET = [
     ]
   }
 ];
+
+// ==========================================
+// NGÂN HÀNG BÀI TẬP TỰ LUẬN CHƯƠNG II (ĐỘNG HỌC)
+// Tuyển tập bài toán chuẩn SGK KNTT kèm lời giải chi tiết
+// ==========================================
+const ESSAY_PROBLEMS = [
+  {
+    id: "essay-4-1",
+    lessonId: "bai-4",
+    lessonNumber: 4,
+    lessonTitle: "Độ dịch chuyển và quãng đường đi được",
+    title: "Bài 1: Chuyển động bơi dọc theo chiều dài bể bơi",
+    difficulty: "Cơ bản",
+    problem: "Một vận động viên bơi dọc theo chiều dài 50 m của một bể bơi hết 40 s, sau đó quay đầu bơi trở lại vạch xuất phát hết 60 s.<br>Hãy xác định:<br><strong>a)</strong> Quãng đường bơi được và độ lớn độ dịch chuyển của vận động viên trong 40 s đầu.<br><strong>b)</strong> Quãng đường bơi được và độ dịch chuyển của vận động viên trong cả quá trình bơi đi và về (100 s).",
+    given: [
+      "Chiều dài bể bơi: <span data-math=\"inline\">L = 50\\text{ m}</span>",
+      "Thời gian bơi xuôi: <span data-math=\"inline\">t_1 = 40\\text{ s}</span>",
+      "Thời gian bơi về: <span data-math=\"inline\">t_2 = 60\\text{ s}</span>"
+    ],
+    hints: [
+      "Quãng đường s là tổng chiều dài đường đi thực tế của người bơi.",
+      "Độ dịch chuyển d là đoạn thẳng nối điểm đầu và điểm cuối kèm theo hướng.",
+      "Khi người bơi quay lại điểm xuất phát ban đầu, vị trí đầu và cuối trùng nhau."
+    ],
+    numericCheck: {
+      label: "Nhập tổng quãng đường cả đi và về (m):",
+      expected: 100,
+      unit: "m"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Trong 40 s đầu (bơi một chiều từ đầu này đến đầu kia bể):",
+          content: "Chọn trục tọa độ Ox nằm dọc theo thành bể bơi, gốc O tại vạch xuất phát, chiều dương là chiều bơi ban đầu.<br>• Quãng đường bơi được: <span data-math=\"inline\">s_1 = 50\\text{ m}</span>.<br>• Do người đó bơi thẳng theo một chiều nên độ lớn độ dịch chuyển bằng quãng đường: <span data-math=\"inline\">d_1 = +50\\text{ m}</span> (hướng theo chiều dương)."
+        },
+        {
+          title: "b) Trong cả quá trình bơi đi và về (100 s):",
+          content: "• Tổng quãng đường đi được: <span data-math=\"inline\">s = s_1 + s_2 = 50 + 50 = 100\\text{ m}</span>.<br>• Khi quay trở về vạch xuất phát ban đầu, vị trí cuối cùng trùng với vị trí ban đầu (tọa độ <span data-math=\"inline\">x = 0</span>). Do đó độ dịch chuyển tổng hợp là:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">d = x_2 - x_1 = 0\\text{ m}</span></div>"
+        }
+      ],
+      note: "<strong>Quy tắc cần nhớ:</strong> Quãng đường luôn dương và luôn cộng dồn tích lũy, trong khi độ dịch chuyển có thể bằng 0 nếu vật quay lại vị trí xuất phát."
+    }
+  },
+  {
+    id: "essay-4-2",
+    lessonId: "bai-4",
+    lessonNumber: 4,
+    lessonTitle: "Độ dịch chuyển và quãng đường đi được",
+    title: "Bài 2: Tổng hợp độ dịch chuyển theo hai phương vuông góc",
+    difficulty: "Thông hiểu",
+    problem: "Một bạn học sinh đi bộ từ cổng trường: đầu tiên đi 4 km về hướng Đông, sau đó rẽ sang hướng Bắc và đi tiếp 3 km đến nhà văn hóa thiếu nhi thành phố.<br><strong>a)</strong> Tính tổng quãng đường bạn học sinh đã đi bộ.<br><strong>b)</strong> Biểu diễn các vectơ độ dịch chuyển và xác định độ lớn, hướng của độ dịch chuyển tổng hợp từ cổng trường đến nhà văn hóa.",
+    given: [
+      "Độ dịch chuyển hướng Đông: <span data-math=\"inline\">d_1 = 4\\text{ km}</span>",
+      "Độ dịch chuyển hướng Bắc: <span data-math=\"inline\">d_2 = 3\\text{ km}</span>",
+      "Góc giữa hai phương: <span data-math=\"inline\">\\alpha = 90^\\circ</span>"
+    ],
+    hints: [
+      "Hướng Đông và hướng Bắc vuông góc với nhau (hệ trục tọa độ vuông góc Oxy).",
+      "Áp dụng quy tắc cộng vectơ và định lý Pythagore trong tam giác vuông: \\(d = \\sqrt{d_1^2 + d_2^2}\\).",
+      "Xác định hướng bằng góc lệch so với hướng Đông: \\(\\tan\\theta = \\frac{d_2}{d_1}\\)."
+    ],
+    numericCheck: {
+      label: "Nhập độ lớn độ dịch chuyển tổng hợp (km):",
+      expected: 5,
+      unit: "km"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Tổng quãng đường học sinh đã đi bộ:",
+          content: "Quãng đường bằng tổng độ dài các đoạn đường thực tế:<br><div class=\"text-center my-2 font-bold\"><span data-math=\"display\">s = d_1 + d_2 = 4 + 3 = 7\\text{ km}</span></div>"
+        },
+        {
+          title: "b) Độ dịch chuyển tổng hợp:",
+          content: "Gọi <span data-math=\"inline\">\\vec{d}_1</span> là vectơ độ dịch chuyển về hướng Đông, <span data-math=\"inline\">\\vec{d}_2</span> là vectơ độ dịch chuyển về hướng Bắc.<br>Vectơ độ dịch chuyển tổng hợp: <span data-math=\"inline\">\\vec{d} = \\vec{d}_1 + \\vec{d}_2</span>.<br>Vì hướng Đông vuông góc với hướng Bắc nên áp dụng định lý Pythagore:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">d = \\sqrt{d_1^2 + d_2^2} = \\sqrt{4^2 + 3^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5\\text{ km}</span></div><br>• Góc <span data-math=\"inline\">\\theta</span> hợp bởi <span data-math=\"inline\">\\vec{d}</span> với hướng Đông:<br><div class=\"text-center my-2\"><span data-math=\"display\">\\tan\\theta = \\frac{d_2}{d_1} = \\frac{3}{4} = 0,75 \\implies \\theta \\approx 36^\\circ 52'</span></div><br>Vậy độ dịch chuyển tổng hợp có độ lớn 5 km, hướng Đông - Bắc (lệch 36°52' về phía Bắc so với hướng Đông)."
+        }
+      ],
+      note: "<strong>Nhận xét:</strong> Độ lớn độ dịch chuyển (5 km) luôn nhỏ hơn hoặc bằng quãng đường đi được (7 km). Dấu bằng chỉ xảy ra khi chuyển động thẳng một chiều không đổi hướng."
+    }
+  },
+  {
+    id: "essay-5-1",
+    lessonId: "bai-5",
+    lessonNumber: 5,
+    lessonTitle: "Tốc độ và vận tốc",
+    title: "Bài 3: Tính tốc độ trung bình trên hai nửa quãng đường",
+    difficulty: "Thông hiểu",
+    problem: "Một chiếc ô tô di chuyển trên một đoạn đường thẳng AB dài 120 km. Trong nửa quãng đường đầu xe chạy với tốc độ không đổi <span data-math=\"inline\">v_1 = 60\\text{ km/h}</span>. Trong nửa quãng đường còn lại xe chạy với tốc độ không đổi <span data-math=\"inline\">v_2 = 40\\text{ km/h}</span>.<br><strong>a)</strong> Tính thời gian xe đi trong nửa quãng đường đầu và nửa quãng đường sau.<br><strong>b)</strong> Tính tốc độ trung bình của ô tô trên cả chặng đường AB.",
+    given: [
+      "Tổng quãng đường: <span data-math=\"inline\">s = 120\\text{ km}</span>",
+      "Nửa quãng đường đầu: <span data-math=\"inline\">s_1 = \\frac{s}{2} = 60\\text{ km}</span> với tốc độ <span data-math=\"inline\">v_1 = 60\\text{ km/h}</span>",
+      "Nửa quãng đường sau: <span data-math=\"inline\">s_2 = \\frac{s}{2} = 60\\text{ km}</span> với tốc độ <span data-math=\"inline\">v_2 = 40\\text{ km/h}</span>"
+    ],
+    hints: [
+      "Tính thời gian \\(t_1 = \\frac{s_1}{v_1}\\) và \\(t_2 = \\frac{s_2}{v_2}\\).",
+      "Tốc độ trung bình bằng tổng quãng đường chia cho tổng thời gian: \\(v_{tb} = \\frac{s}{t_1 + t_2}\\).",
+      "Tuyệt đối không lấy trung bình cộng \\((60 + 40)/2\\) vì thời gian đi hai đoạn là khác nhau!"
+    ],
+    numericCheck: {
+      label: "Nhập tốc độ trung bình trên cả chặng đường (km/h):",
+      expected: 48,
+      unit: "km/h"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Thời gian ô tô chạy trên từng đoạn đường:",
+          content: "• Thời gian đi nửa quãng đường đầu:<br><div class=\"text-center my-2\"><span data-math=\"display\">t_1 = \\frac{s_1}{v_1} = \\frac{60}{60} = 1\\text{ h}</span></div><br>• Thời gian đi nửa quãng đường sau:<br><div class=\"text-center my-2\"><span data-math=\"display\">t_2 = \\frac{s_2}{v_2} = \\frac{60}{40} = 1,5\\text{ h}</span></div><br>• Tổng thời gian xe chạy hết quãng đường AB:<br><div class=\"text-center my-2\"><span data-math=\"display\">t = t_1 + t_2 = 1 + 1,5 = 2,5\\text{ h}</span></div>"
+        },
+        {
+          title: "b) Tốc độ trung bình trên toàn bộ quãng đường AB:",
+          content: "Theo định nghĩa tốc độ trung bình:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">v_{tb} = \\frac{s}{t} = \\frac{s}{t_1 + t_2} = \\frac{120}{2,5} = 48\\text{ km/h}</span></div><br><em>Công thức tổng quát cho bài toán chia nửa quãng đường:</em><br><div class=\"text-center my-2\"><span data-math=\"display\">v_{tb} = \\frac{2v_1 v_2}{v_1 + v_2} = \\frac{2 \\cdot 60 \\cdot 40}{60 + 40} = \\frac{4800}{100} = 48\\text{ km/h}</span></div>"
+        }
+      ],
+      note: "<strong>Cảnh báo bẫy sai lầm:</strong> Rất nhiều học sinh nhầm lẫn tính trung bình cộng <span data-math=\"inline\">\\frac{60 + 40}{2} = 50\\text{ km/h}</span>. Điều này chỉ đúng khi vật chuyển động trong hai khoảng <em>thời gian</em> bằng nhau, còn khi hai <em>quãng đường</em> bằng nhau thì phải dùng công thức điều hòa."
+    }
+  },
+  {
+    id: "essay-5-2",
+    lessonId: "bai-5",
+    lessonNumber: 5,
+    lessonTitle: "Tốc độ và vận tốc",
+    title: "Bài 4: Chuyển động của ca nô trên sông (Cộng vận tốc)",
+    difficulty: "Vận dụng",
+    problem: "Một chiếc ca nô chạy xuôi dòng nước từ bến A đến bến B cách nhau 36 km hết 1 giờ. Khi ca nô chạy ngược dòng từ bến B về lại bến A thì hết 1,5 giờ. Coi vận tốc của ca nô đối với nước và vận tốc của nước đối với bờ sông là không đổi.<br><strong>a)</strong> Tính vận tốc của ca nô khi xuôi dòng và khi ngược dòng so với bờ sông.<br><strong>b)</strong> Tính vận tốc riêng của ca nô đối với dòng nước và vận tốc chảy của dòng nước đối với bờ sông.",
+    given: [
+      "Khoảng cách giữa hai bến: <span data-math=\"inline\">s = 36\\text{ km}</span>",
+      "Thời gian xuôi dòng: <span data-math=\"inline\">t_{xuôi} = 1\\text{ h}</span>",
+      "Thời gian ngược dòng: <span data-math=\"inline\">t_{ngược} = 1,5\\text{ h}</span>"
+    ],
+    hints: [
+      "Gọi (1) là ca nô, (2) là dòng nước, (3) là bờ sông.",
+      "Khi xuôi dòng: \\(v_{xuôi} = v_{1,3} = v_{1,2} + v_{2,3}\\).",
+      "Khi ngược dòng: \\(v_{ngược} = v_{1,3}' = v_{1,2} - v_{2,3}\\).",
+      "Giải hệ hai phương trình bậc nhất hai ẩn để tìm \\(v_{1,2}\\) và \\(v_{2,3}\\)."
+    ],
+    numericCheck: {
+      label: "Nhập vận tốc riêng của ca nô đối với nước (km/h):",
+      expected: 30,
+      unit: "km/h"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Vận tốc của ca nô đối với bờ khi xuôi dòng và ngược dòng:",
+          content: "• Khi xuôi dòng:<br><div class=\"text-center my-2\"><span data-math=\"display\">v_{xuôi} = \\frac{s}{t_{xuôi}} = \\frac{36}{1} = 36\\text{ km/h}</span></div><br>• Khi ngược dòng:<br><div class=\"text-center my-2\"><span data-math=\"display\">v_{ngược} = \\frac{s}{t_{ngược}} = \\frac{36}{1,5} = 24\\text{ km/h}</span></div>"
+        },
+        {
+          title: "b) Vận tốc của ca nô đối với nước và của nước đối với bờ:",
+          content: "Ký hiệu: (1) là ca nô, (2) là dòng nước, (3) là bờ sông.<br>Áp dụng công thức cộng vận tốc: <span data-math=\"inline\">\\vec{v}_{1,3} = \\vec{v}_{1,2} + \\vec{v}_{2,3}</span>.<br>• Khi xuôi dòng: <span data-math=\"inline\">v_{1,2} + v_{2,3} = 36</span> &nbsp; (1)<br>• Khi ngược dòng: <span data-math=\"inline\">v_{1,2} - v_{2,3} = 24</span> &nbsp; (2)<br><br>Cộng hai vế của (1) và (2):<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">2v_{1,2} = 36 + 24 = 60 \\implies v_{1,2} = 30\\text{ km/h}</span></div><br>Trừ hai vế của (1) và (2):<br><div class=\"text-center my-2 font-bold text-emerald-600 dark:text-emerald-400\"><span data-math=\"display\">2v_{2,3} = 36 - 24 = 12 \\implies v_{2,3} = 6\\text{ km/h}</span></div><br>Vậy vận tốc riêng của ca nô đối với nước là 30 km/h, vận tốc dòng chảy của nước đối với bờ là 6 km/h."
+        }
+      ],
+      note: "<strong>Quy tắc nhớ nhanh:</strong> Vận tốc thuyền đối với nước bằng trung bình cộng vận tốc xuôi và ngược; vận tốc dòng nước bằng nửa hiệu của vận tốc xuôi và ngược."
+    }
+  },
+  {
+    id: "essay-7-1",
+    lessonId: "bai-7",
+    lessonNumber: 7,
+    lessonTitle: "Đồ thị độ dịch chuyển – thời gian",
+    title: "Bài 5: Khai thác đồ thị d – t của chuyển động thẳng",
+    difficulty: "Thông hiểu",
+    problem: "Một bạn đi xe đạp từ nhà đến thư viện tỉnh rồi quay về theo đường thẳng. Đồ thị độ dịch chuyển – thời gian (d – t) của chuyến đi gồm 3 giai đoạn:<br>• <strong>Giai đoạn 1:</strong> Từ <span data-math=\"inline\">t = 0</span> đến <span data-math=\"inline\">t = 0,5\\text{ h}</span>, độ dịch chuyển tăng đều từ 0 đến 10 km.<br>• <strong>Giai đoạn 2:</strong> Từ <span data-math=\"inline\">t = 0,5\\text{ h}</span> đến <span data-math=\"inline\">t = 1,5\\text{ h}</span>, đồ thị là đoạn nằm ngang ứng với <span data-math=\"inline\">d = 10\\text{ km}</span>.<br>• <strong>Giai đoạn 3:</strong> Từ <span data-math=\"inline\">t = 1,5\\text{ h}</span> đến <span data-math=\"inline\">t = 2,5\\text{ h}</span>, độ dịch chuyển giảm đều từ 10 km về 0.<br><strong>a)</strong> Mô tả tính chất chuyển động và tính vận tốc của xe trong từng giai đoạn.<br><strong>b)</strong> Tính quãng đường đi được và vận tốc trung bình của bạn đó trong toàn bộ 2,5 h.",
+    given: [
+      "Giai đoạn 1: <span data-math=\"inline\">\\Delta t_1 = 0,5\\text{ h}, \\Delta d_1 = 10 - 0 = 10\\text{ km}</span>",
+      "Giai đoạn 2: <span data-math=\"inline\">\\Delta t_2 = 1,0\\text{ h}, d = 10\\text{ km}\\text{ (không đổi)}</span>",
+      "Giai đoạn 3: <span data-math=\"inline\">\\Delta t_3 = 1,0\\text{ h}, \\Delta d_3 = 0 - 10 = -10\\text{ km}</span>"
+    ],
+    hints: [
+      "Hệ số góc của đồ thị d - t biểu thị vận tốc: \\(v = \\frac{\\Delta d}{\\Delta t}\\).",
+      "Đoạn nằm ngang biểu thị vật đứng yên.",
+      "Vận tốc mang dấu âm khi vật chuyển động theo chiều ngược chiều dương.",
+      "Vận tốc trung bình bằng độ dịch chuyển chia thời gian, khác với tốc độ trung bình bằng quãng đường chia thời gian."
+    ],
+    numericCheck: {
+      label: "Nhập tốc độ trung bình cả chuyến đi (km/h):",
+      expected: 8,
+      unit: "km/h"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Vận tốc trong từng giai đoạn:",
+          content: "• <strong>Giai đoạn 1 (0 -> 0,5 h):</strong> Đoạn dốc lên thẳng đều theo chiều dương:<br><div class=\"text-center my-2\"><span data-math=\"display\">v_1 = \\frac{\\Delta d_1}{\\Delta t_1} = \\frac{10 - 0}{0,5 - 0} = +20\\text{ km/h}</span></div><br>• <strong>Giai đoạn 2 (0,5 -> 1,5 h):</strong> Đoạn thẳng nằm ngang song song trục Ot, vị trí không đổi:<br><div class=\"text-center my-2\"><span data-math=\"display\">v_2 = 0\\text{ km/h} \\quad \\text{(xe dừng lại đọc sách tại thư viện)}</span></div><br>• <strong>Giai đoạn 3 (1,5 -> 2,5 h):</strong> Đoạn dốc xuống thẳng đều ngược chiều dương về nhà:<br><div class=\"text-center my-2\"><span data-math=\"display\">v_3 = \\frac{\\Delta d_3}{\\Delta t_3} = \\frac{0 - 10}{2,5 - 1,5} = \\frac{-10}{1} = -20\\text{ km/h}</span></div>(Dấu âm chỉ rõ xe đang chuyển động ngược chiều dương đã chọn)."
+        },
+        {
+          title: "b) Quãng đường và vận tốc trung bình cả chuyến đi (2,5 h):",
+          content: "• Tổng quãng đường đi được:<br><div class=\"text-center my-2\"><span data-math=\"display\">s = s_1 + s_2 + s_3 = 10 + 0 + 10 = 20\\text{ km}</span></div><br>• Độ dịch chuyển tổng hợp sau 2,5 h (quay về nhà):<br><div class=\"text-center my-2\"><span data-math=\"display\">d = x_{cuối} - x_{đầu} = 0 - 0 = 0\\text{ km}</span></div><br>• Tốc độ trung bình:<br><div class=\"text-center my-2 font-bold text-emerald-600 dark:text-emerald-400\"><span data-math=\"display\">v = \\frac{s}{t} = \\frac{20}{2,5} = 8\\text{ km/h}</span></div><br>• Vận tốc trung bình:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">v_{tb} = \\frac{d}{t} = \\frac{0}{2,5} = 0\\text{ km/h}</span></div>"
+        }
+      ],
+      note: "<strong>Điểm mấu chốt:</strong> Vận tốc là đại lượng vectơ có thể mang giá trị âm hoặc bằng 0, còn tốc độ trung bình là đại lượng vô hướng luôn dương."
+    }
+  },
+  {
+    id: "essay-8-1",
+    lessonId: "bai-8",
+    lessonNumber: 8,
+    lessonTitle: "Chuyển động biến đổi. Gia tốc",
+    title: "Bài 6: Xác định gia tốc của xe máy khi hãm phanh",
+    difficulty: "Cơ bản",
+    problem: "Một người điều khiển xe máy đang chuyển động thẳng đều với vận tốc 54 km/h thì nhìn thấy chướng ngại vật phía trước và hãm phanh. Sau 10 s kể từ lúc hãm phanh, vận tốc xe giảm xuống còn 18 km/h.<br><strong>a)</strong> Đổi các giá trị vận tốc ra đơn vị chuẩn SI (m/s).<br><strong>b)</strong> Tính gia tốc của xe máy trong quá trình hãm phanh.<br><strong>c)</strong> Nhận xét về hướng của vectơ gia tốc so với hướng của vectơ vận tốc.",
+    given: [
+      "Vận tốc ban đầu: <span data-math=\"inline\">v_0 = 54\\text{ km/h}</span>",
+      "Thời gian hãm phanh: <span data-math=\"inline\">t = 10\\text{ s}</span>",
+      "Vận tốc sau 10 s: <span data-math=\"inline\">v = 18\\text{ km/h}</span>"
+    ],
+    hints: [
+      "Chia cho 3,6 để đổi từ km/h sang m/s: \\(1\\text{ m/s} = 3,6\\text{ km/h}\\).",
+      "Công thức tính gia tốc: \\(a = \\frac{v - v_0}{t}\\).",
+      "Trong chuyển động chậm dần đều, tích \\(a \\cdot v < 0\\), vectơ gia tốc ngược chiều vectơ vận tốc."
+    ],
+    numericCheck: {
+      label: "Nhập độ lớn gia tốc của xe (m/s²):",
+      expected: 1,
+      unit: "m/s²"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Đổi đơn vị vận tốc sang chuẩn SI (m/s):",
+          content: "• <span data-math=\"inline\">v_0 = 54\\text{ km/h} = \\frac{54}{3,6} = 15\\text{ m/s}</span><br>• <span data-math=\"inline\">v = 18\\text{ km/h} = \\frac{18}{3,6} = 5\\text{ m/s}</span>"
+        },
+        {
+          title: "b) Tính gia tốc của xe máy:",
+          content: "Chọn chiều dương là chiều chuyển động của xe máy.<br>Gia tốc của xe:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">a = \\frac{v - v_0}{t} = \\frac{5 - 15}{10} = \\frac{-10}{10} = -1\\text{ m/s}^2</span></div>"
+        },
+        {
+          title: "c) Nhận xét về vectơ gia tốc:",
+          content: "Vì <span data-math=\"inline\">a = -1\\text{ m/s}^2 < 0</span> và <span data-math=\"inline\">v > 0</span> nên tích <span data-math=\"inline\">a \\cdot v = (-1) \\cdot 5 = -5 < 0</span>.<br>Do đó, xe chuyển động chậm dần đều, vectơ gia tốc <span data-math=\"inline\">\\vec{a}</span> ngược chiều với vectơ vận tốc <span data-math=\"inline\">\\vec{v}</span> (ngược chiều chuyển động)."
+        }
+      ],
+      note: "<strong>Lưu ý dấu:</strong> Gia tốc âm không có nghĩa là vật chuyển động lùi lại, mà nó thể hiện gia tốc có chiều ngược với chiều dương đã chọn. Khi vật chuyển động chậm dần đều theo chiều dương thì a luôn âm."
+    }
+  },
+  {
+    id: "essay-9-1",
+    lessonId: "bai-9",
+    lessonNumber: 9,
+    lessonTitle: "Chuyển động thẳng biến đổi đều",
+    title: "Bài 7: Chuyển động chậm dần đều và quãng đường hãm phanh",
+    difficulty: "Vận dụng",
+    problem: "Một đoàn tàu hỏa chở khách đang chạy với vận tốc 72 km/h thì người lái tàu phát hiện tín hiệu đèn đỏ phía trước và bắt đầu hãm phanh. Tàu chuyển động chậm dần đều với gia tốc có độ lớn 0,5 m/s² cho đến khi dừng lại hẳn.<br><strong>a)</strong> Tính thời gian kể từ thời điểm hãm phanh đến khi đoàn tàu dừng lại hẳn.<br><strong>b)</strong> Tính quãng đường đoàn tàu còn đi thêm được trong thời gian hãm phanh.<br><strong>c)</strong> Tính vận tốc của đoàn tàu sau khi hãm phanh được một nửa quãng đường dừng.",
+    given: [
+      "Vận tốc đầu: <span data-math=\"inline\">v_0 = 72\\text{ km/h} = 20\\text{ m/s}</span>",
+      "Vận tốc cuối khi dừng hẳn: <span data-math=\"inline\">v = 0\\text{ m/s}</span>",
+      "Gia tốc: <span data-math=\"inline\">a = -0,5\\text{ m/s}^2</span> (chậm dần đều)"
+    ],
+    hints: [
+      "Áp dụng phương trình vận tốc \\(v = v_0 + at \\implies t = \\frac{v - v_0}{a}\\).",
+      "Áp dụng công thức độc lập thời gian: \\(v^2 - v_0^2 = 2as \\implies s = \\frac{v^2 - v_0^2}{2a}\\).",
+      "Để tính vận tốc tại nửa quãng đường \\(s' = s/2\\), dùng lại công thức độc lập: \\(v'^2 - v_0^2 = 2as'\\)."
+    ],
+    numericCheck: {
+      label: "Nhập quãng đường tàu đi được từ khi phanh đến khi dừng (m):",
+      expected: 400,
+      unit: "m"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Thời gian từ khi phanh đến khi tàu dừng lại hẳn:",
+          content: "Chọn chiều dương là chiều chuyển động của đoàn tàu.<br>Đổi <span data-math=\"inline\">v_0 = 72\\text{ km/h} = \\frac{72}{3,6} = 20\\text{ m/s}</span>.<br>Vì tàu chuyển động chậm dần đều nên <span data-math=\"inline\">a = -0,5\\text{ m/s}^2</span>. Khi tàu dừng hẳn thì <span data-math=\"inline\">v = 0</span>.<br>Áp dụng công thức vận tốc:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">v = v_0 + at \\implies t = \\frac{v - v_0}{a} = \\frac{0 - 20}{-0,5} = 40\\text{ s}</span></div>"
+        },
+        {
+          title: "b) Quãng đường hãm phanh của đoàn tàu:",
+          content: "Áp dụng hệ thức liên hệ độc lập với thời gian:<br><div class=\"text-center my-2 font-bold text-emerald-600 dark:text-emerald-400\"><span data-math=\"display\">v^2 - v_0^2 = 2as \\implies s = \\frac{v^2 - v_0^2}{2a} = \\frac{0^2 - 20^2}{2 \\cdot (-0,5)} = \\frac{-400}{-1} = 400\\text{ m}</span></div><br><em>Cách khác:</em> Dùng công thức <span data-math=\"inline\">s = v_0 t + \\frac{1}{2}at^2 = 20 \\cdot 40 + \\frac{1}{2}(-0,5)(40)^2 = 800 - 400 = 400\\text{ m}</span>."
+        },
+        {
+          title: "c) Vận tốc của tàu sau khi đi được nửa quãng đường hãm phanh (s' = 200 m):",
+          content: "Áp dụng công thức liên hệ khi <span data-math=\"inline\">s' = 200\\text{ m}</span>:<br><div class=\"text-center my-2\"><span data-math=\"display\">v'^2 - v_0^2 = 2as' \\implies v'^2 = v_0^2 + 2as' = 20^2 + 2(-0,5)(200) = 400 - 200 = 200</span></div><br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">v' = \\sqrt{200} \\approx 14,14\\text{ m/s} \\approx 50,9\\text{ km/h}</span></div>"
+        }
+      ],
+      note: "<strong>Nhận xét:</strong> Sau khi đi hết 1/2 quãng đường hãm phanh, vận tốc tàu chỉ giảm từ 20 m/s xuống 14,14 m/s (chứ không phải giảm về 10 m/s), vì giai đoạn đầu tàu chạy với tốc độ cao hơn giai đoạn sau."
+    }
+  },
+  {
+    id: "essay-9-2",
+    lessonId: "bai-9",
+    lessonNumber: 9,
+    lessonTitle: "Chuyển động thẳng biến đổi đều",
+    title: "Bài 8: Quãng đường đi được trong giây thứ n",
+    difficulty: "Vận dụng",
+    problem: "Một chiếc xe ô tô xuất phát từ trạng thái nghỉ (<span data-math=\"inline\">v_0 = 0</span>), chuyển động thẳng nhanh dần đều trên một đường thẳng với gia tốc không đổi <span data-math=\"inline\">a = 2\\text{ m/s}^2</span>.<br><strong>a)</strong> Tính vận tốc và quãng đường xe đi được sau 4 giây đầu tiên.<br><strong>b)</strong> Tính quãng đường xe đi được sau 5 giây đầu tiên.<br><strong>c)</strong> Từ đó tính quãng đường xe đi được riêng trong giây thứ 5.",
+    given: [
+      "Vận tốc khởi hành: <span data-math=\"inline\">v_0 = 0</span>",
+      "Gia tốc: <span data-math=\"inline\">a = 2\\text{ m/s}^2</span>",
+      "Thời điểm xét: <span data-math=\"inline\">t_1 = 4\\text{ s}</span> và <span data-math=\"inline\">t_2 = 5\\text{ s}</span>"
+    ],
+    hints: [
+      "Quãng đường đi trong t giây: \\(s = \\frac{1}{2} a t^2\\).",
+      "Quãng đường đi trong giây thứ 5 là hiệu quãng đường đi sau 5 giây và sau 4 giây: \\(\\Delta s_5 = s_5 - s_4\\)."
+    ],
+    numericCheck: {
+      label: "Nhập quãng đường đi được riêng trong giây thứ 5 (m):",
+      expected: 9,
+      unit: "m"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Vận tốc và quãng đường sau 4 giây đầu tiên:",
+          content: "• Vận tốc sau 4 s:<br><div class=\"text-center my-2\"><span data-math=\"display\">v_4 = at_1 = 2 \\cdot 4 = 8\\text{ m/s}</span></div><br>• Quãng đường đi được trong 4 s đầu:<br><div class=\"text-center my-2\"><span data-math=\"display\">s_4 = \\frac{1}{2} a t_1^2 = \\frac{1}{2} \\cdot 2 \\cdot 4^2 = 16\\text{ m}</span></div>"
+        },
+        {
+          title: "b) Quãng đường sau 5 giây đầu tiên:",
+          content: "Áp dụng công thức quãng đường với <span data-math=\"inline\">t_2 = 5\\text{ s}</span>:<br><div class=\"text-center my-2\"><span data-math=\"display\">s_5 = \\frac{1}{2} a t_2^2 = \\frac{1}{2} \\cdot 2 \\cdot 5^2 = 25\\text{ m}</span></div>"
+        },
+        {
+          title: "c) Quãng đường đi được riêng trong giây thứ 5:",
+          content: "Quãng đường vật đi được trong giây thứ 5 chính là phần quãng đường đi thêm từ thời điểm <span data-math=\"inline\">t = 4\\text{ s}</span> đến <span data-math=\"inline\">t = 5\\text{ s}</span>:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">\\Delta s_5 = s_5 - s_4 = 25 - 16 = 9\\text{ m}</span></div><br><em>Công thức nhanh cho giây thứ n (khi v₀ = 0):</em><br><div class=\"text-center my-2\"><span data-math=\"display\">\\Delta s_n = a\\left(n - \\frac{1}{2}\\right) = 2 \\cdot \\left(5 - 0,5\\right) = 9\\text{ m}</span></div>"
+        }
+      ],
+      note: "<strong>Phân biệt quan trọng:</strong> 'Quãng đường trong 5 giây' là <span data-math=\"inline\">s_5 = 25\\text{ m}</span> (tính từ t = 0 đến t = 5 s). Còn 'Quãng đường trong giây thứ 5' là <span data-math=\"inline\">\\Delta s_5 = 9\\text{ m}</span> (chỉ tính trong khoảng thời gian từ t = 4 s đến t = 5 s, độ dài 1 s)."
+    }
+  },
+  {
+    id: "essay-10-1",
+    lessonId: "bai-10",
+    lessonNumber: 10,
+    lessonTitle: "Sự rơi tự do",
+    title: "Bài 9: Thả rơi tự do và quãng đường trong giây cuối",
+    difficulty: "Vận dụng",
+    problem: "Thả rơi tự do một hòn sỏi từ đỉnh một tòa tháp cao 80 m so với mặt đất. Lấy gia tốc rơi tự do <span data-math=\"inline\">g = 10\\text{ m/s}^2</span>. Bỏ qua mọi sức cản của không khí.<br><strong>a)</strong> Tính thời gian hòn sỏi rơi chạm đất.<br><strong>b)</strong> Tính vận tốc của hòn sỏi ngay trước khi chạm đất.<br><strong>c)</strong> Tính quãng đường hòn sỏi rơi được trong 1 giây cuối cùng trước khi chạm đất.",
+    given: [
+      "Độ cao thả rơi: <span data-math=\"inline\">h = 80\\text{ m}</span>",
+      "Gia tốc trọng trường: <span data-math=\"inline\">g = 10\\text{ m/s}^2</span>",
+      "Vận tốc đầu: <span data-math=\"inline\">v_0 = 0</span>"
+    ],
+    hints: [
+      "Thời gian rơi: \\(t = \\sqrt{\\frac{2h}{g}}\\).",
+      "Vận tốc chạm đất: \\(v = gt = \\sqrt{2gh}\\).",
+      "Quãng đường trong 1 s cuối bằng tổng độ cao trừ đi quãng đường rơi trong (t - 1) giây đầu."
+    ],
+    numericCheck: {
+      label: "Nhập quãng đường rơi trong giây cuối cùng (m):",
+      expected: 35,
+      unit: "m"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Thời gian rơi của hòn sỏi chạm đất:",
+          content: "Chọn trục Oy thẳng đứng hướng xuống, gốc O tại vị trí thả.<br>Áp dụng công thức tính thời gian rơi tự do:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2 \\cdot 80}{10}} = \\sqrt{16} = 4\\text{ s}</span></div>"
+        },
+        {
+          title: "b) Vận tốc của hòn sỏi ngay trước khi chạm đất:",
+          content: "Áp dụng công thức vận tốc rơi tự do:<br><div class=\"text-center my-2 font-bold text-emerald-600 dark:text-emerald-400\"><span data-math=\"display\">v = g \\cdot t = 10 \\cdot 4 = 40\\text{ m/s}</span></div><br><em>Hoặc tính qua hệ thức độc lập:</em><br><div class=\"text-center my-2\"><span data-math=\"display\">v = \\sqrt{2gh} = \\sqrt{2 \\cdot 10 \\cdot 80} = \\sqrt{1600} = 40\\text{ m/s}</span></div>"
+        },
+        {
+          title: "c) Quãng đường rơi trong 1 giây cuối cùng trước khi chạm đất:",
+          content: "Tổng thời gian rơi là <span data-math=\"inline\">t = 4\\text{ s}</span>. Vậy 1 giây cuối cùng là khoảng thời gian từ <span data-math=\"inline\">t_1 = 3\\text{ s}</span> đến <span data-math=\"inline\">t_2 = 4\\text{ s}</span>.<br>• Quãng đường hòn sỏi rơi trong 3 s đầu:<br><div class=\"text-center my-2\"><span data-math=\"display\">h_3 = \\frac{1}{2} g t_1^2 = \\frac{1}{2} \\cdot 10 \\cdot 3^2 = 45\\text{ m}</span></div><br>• Quãng đường rơi trong 1 giây cuối cùng:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">\\Delta h_{cuối} = h - h_3 = 80 - 45 = 35\\text{ m}</span></div>"
+        }
+      ],
+      note: "<strong>Nhận xét:</strong> Quãng đường rơi trong các giây liên tiếp của vật rơi tự do tuân theo tỉ lệ các số lẻ liên tiếp: 5m, 15m, 25m, 35m... Vì vậy trong giây thứ 4, quãng đường rơi đúng bằng 35m."
+    }
+  },
+  {
+    id: "essay-12-1",
+    lessonId: "bai-12",
+    lessonNumber: 12,
+    lessonTitle: "Chuyển động ném",
+    title: "Bài 10: Chuyển động ném ngang từ đỉnh vách đá",
+    difficulty: "Vận dụng cao",
+    problem: "Từ đỉnh một vách đá cao 45 m so với mặt biển, một người ném một hòn đá nhỏ theo phương nằm ngang với vận tốc ban đầu <span data-math=\"inline\">v_0 = 20\\text{ m/s}</span>. Lấy <span data-math=\"inline\">g = 10\\text{ m/s}^2</span> và bỏ qua sức cản của không khí.<br><strong>a)</strong> Viết phương trình quỹ đạo của hòn đá.<br><strong>b)</strong> Tính thời gian chuyển động và tầm bay xa L của hòn đá khi vừa chạm mặt biển.<br><strong>c)</strong> Tính độ lớn vận tốc và góc chạm mặt biển của hòn đá.",
+    given: [
+      "Độ cao ném: <span data-math=\"inline\">H = 45\\text{ m}</span>",
+      "Vận tốc ném ngang: <span data-math=\"inline\">v_0 = 20\\text{ m/s}</span>",
+      "Gia tốc trọng trường: <span data-math=\"inline\">g = 10\\text{ m/s}^2</span>"
+    ],
+    hints: [
+      "Chọn hệ trục tọa độ Oxy: O tại vị trí ném, Ox nằm ngang theo chiều \\(v_0\\), Oy thẳng đứng hướng xuống.",
+      "Phương trình quỹ đạo: \\(y = \\frac{g}{2 v_0^2} x^2\\).",
+      "Thời gian rơi: \\(t = \\sqrt{\\frac{2H}{g}}\\), Tầm xa: \\(L = x_{max} = v_0 t\\).",
+      "Vận tốc chạm biển tổng hợp từ \\(v_x = v_0\\) và \\(v_y = gt\\): \\(v = \\sqrt{v_x^2 + v_y^2}\\)."
+    ],
+    numericCheck: {
+      label: "Nhập tầm bay xa L của hòn đá (m):",
+      expected: 60,
+      unit: "m"
+    },
+    solution: {
+      steps: [
+        {
+          title: "a) Thiết lập hệ tọa độ và phương trình quỹ đạo:",
+          content: "Chọn hệ trục tọa độ Oxy: Gốc O tại vị trí ném, trục Ox nằm ngang hướng theo hướng ném, trục Oy thẳng đứng hướng xuống dưới. Gốc thời gian lúc ném vật.<br>• Theo phương Ox (chuyển động thẳng đều): <span data-math=\"inline\">x = v_0 t = 20t \\implies t = \\frac{x}{20}</span><br>• Theo phương Oy (chuyển động rơi tự do): <span data-math=\"inline\">y = \\frac{1}{2}gt^2 = 5t^2</span><br>Thay <span data-math=\"inline\">t = \\frac{x}{20}</span> vào phương trình y ta được phương trình quỹ đạo:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">y = \\frac{g}{2v_0^2} x^2 = \\frac{10}{2 \\cdot 20^2} x^2 = \\frac{1}{80} x^2 = 0,0125 x^2 \\quad (x \\ge 0)</span></div>Quỹ đạo là một nhánh parabol có đỉnh tại O."
+        },
+        {
+          title: "b) Thời gian chuyển động và tầm bay xa L:",
+          content: "Khi chạm mặt biển thì <span data-math=\"inline\">y = H = 45\\text{ m}</span>.<br>• Thời gian rơi:<br><div class=\"text-center my-2\"><span data-math=\"display\">t = \\sqrt{\\frac{2H}{g}} = \\sqrt{\\frac{2 \\cdot 45}{10}} = \\sqrt{9} = 3\\text{ s}</span></div><br>• Tầm bay xa của hòn đá:<br><div class=\"text-center my-2 font-bold text-emerald-600 dark:text-emerald-400\"><span data-math=\"display\">L = x_{max} = v_0 t = 20 \\cdot 3 = 60\\text{ m}</span></div>"
+        },
+        {
+          title: "c) Vận tốc khi chạm mặt biển:",
+          content: "Các thành phần vận tốc tại thời điểm chạm biển (<span data-math=\"inline\">t = 3\\text{ s}</span>):<br>• Thành phần nằm ngang: <span data-math=\"inline\">v_x = v_0 = 20\\text{ m/s}</span><br>• Thành phần thẳng đứng: <span data-math=\"inline\">v_y = gt = 10 \\cdot 3 = 30\\text{ m/s}</span><br>Độ lớn vận tốc tổng hợp khi chạm mặt biển:<br><div class=\"text-center my-2 font-bold text-indigo-600 dark:text-indigo-400\"><span data-math=\"display\">v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{20^2 + 30^2} = \\sqrt{400 + 900} = \\sqrt{1300} \\approx 36,06\\text{ m/s}</span></div><br>• Góc chạm mặt biển so với phương ngang:<br><div class=\"text-center my-2\"><span data-math=\"display\">\\tan\\alpha = \\frac{v_y}{v_x} = \\frac{30}{20} = 1,5 \\implies \\alpha \\approx 56^\\circ 19'</span></div>"
+        }
+      ],
+      note: "<strong>Đặc điểm ném ngang:</strong> Thời gian rơi của vật ném ngang chỉ phụ thuộc vào độ cao H ban đầu (bằng đúng thời gian rơi tự do từ cùng độ cao), không phụ thuộc vào vận tốc ném v₀."
+    }
+  }
+];

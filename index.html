@@ -113,10 +113,13 @@
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <!-- Mode Switcher -->
             <div class="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 w-fit text-sm font-medium">
-              <button id="mode-practice-btn" class="px-4 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-indigo-600 dark:text-white transition">
-                ⚡ Luyện Tập Tự Do
+              <button id="mode-practice-btn" class="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-indigo-600 dark:text-white transition">
+                ⚡ Luyện Trắc Nghiệm
               </button>
-              <button id="mode-exam-btn" class="px-4 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 transition">
+              <button id="mode-essay-btn" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 transition">
+                ✍️ Bài Tập Tự Luận
+              </button>
+              <button id="mode-exam-btn" class="px-3.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 transition">
                 ⏱️ Thi Thử (15 Phút)
               </button>
             </div>
@@ -144,9 +147,14 @@
           </div>
         </div>
 
-        <!-- Question Render Box -->
+        <!-- Question Render Box (Trắc nghiệm & Thi thử) -->
         <div id="quiz-render-area">
           <!-- Dynamically populated -->
+        </div>
+
+        <!-- Essay Problems Render Box (Tự luận có lời giải chi tiết) -->
+        <div id="essay-render-area" class="hidden space-y-6">
+          <!-- Dynamically populated by JS -->
         </div>
       </div>
     </div>

@@ -127,7 +127,9 @@ const App = {
   progress: {
     readLessons: {},
     answeredQuestions: {}, // qId => { correct: bool }
-    examScores: []
+    examScores: [],
+    essayDrafts: {},       // probId => string
+    completedEssays: {}    // probId => bool
   },
 
   init() {
@@ -152,8 +154,10 @@ const App = {
     try {
       const saved = localStorage.getItem('vatly10_kntt_progress');
       if (saved) {
-        this.progress = JSON.parse(saved);
+        this.progress = { ...this.progress, ...JSON.parse(saved) };
       }
+      if (!this.progress.essayDrafts) this.progress.essayDrafts = {};
+      if (!this.progress.completedEssays) this.progress.completedEssays = {};
     } catch (e) {
       console.warn('Storage error', e);
     }
@@ -192,7 +196,10 @@ const App = {
 
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['theory', 'practice', 'simulations', 'formulas', 'stats'].includes(hash)) {
+      if (hash === 'essay') {
+        this.switchTab('practice');
+        this.switchPracticeMode('essay');
+      } else if (['theory', 'practice', 'simulations', 'formulas', 'stats'].includes(hash)) {
         this.switchTab(hash);
       }
     };
@@ -243,6 +250,9 @@ const App = {
       if (tabId === 'formulas') {
         const container = document.getElementById('formula-sheet-container');
         if (container) this.renderMath(container);
+      }
+      if (tabId === 'practice' && this.quiz.mode === 'essay') {
+        this.renderEssayProblems();
       }
     }
 
@@ -365,6 +375,28 @@ const App = {
           </ul>
         </div>
 
+        <!-- Action Buttons: Practice Quiz & Essay -->
+        <div class="my-6 p-4 rounded-2xl bg-gradient-to-r from-indigo-50 to-violet-50 dark:from-indigo-950/40 dark:to-violet-950/40 border border-indigo-200 dark:border-indigo-900/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h4 class="font-bold text-indigo-950 dark:text-indigo-200 text-sm flex items-center">
+              <span class="mr-2">✍️</span> Luyện tập củng cố kiến thức - Bài ${lesson.number}
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+              Làm trắc nghiệm nhận biết - thông hiểu hoặc giải bài tập tự luận có chấm đáp số và lời giải chi tiết.
+            </p>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="App.startPracticeForLesson('${lesson.id}')"
+              class="px-3.5 py-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-indigo-600 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-700 rounded-xl text-xs font-bold transition shadow-sm">
+              ⚡ Trắc nghiệm
+            </button>
+            <button onclick="App.startEssayForLesson('${lesson.id}')"
+              class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-sm">
+              ✍️ Tự luận chi tiết →
+            </button>
+          </div>
+        </div>
+
         <!-- Footer Next/Prev -->
         <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center">
           ${this.getPrevLessonBtn(lesson.number)}
@@ -403,7 +435,15 @@ const App = {
     const filterSelect = document.getElementById('quiz-filter-lesson');
     if (filterSelect) filterSelect.value = lessonId;
     this.switchTab('practice');
-    this.setupQuiz();
+    this.switchPracticeMode('practice');
+  },
+
+  startEssayForLesson(lessonId) {
+    this.quiz.lessonFilter = lessonId;
+    const filterSelect = document.getElementById('quiz-filter-lesson');
+    if (filterSelect) filterSelect.value = lessonId;
+    this.switchTab('practice');
+    this.switchPracticeMode('essay');
   },
 
   // PRACTICE & QUIZ SYSTEM
@@ -411,6 +451,7 @@ const App = {
     const lessonFilter = document.getElementById('quiz-filter-lesson');
     const levelFilter = document.getElementById('quiz-filter-level');
     const modePractice = document.getElementById('mode-practice-btn');
+    const modeEssay = document.getElementById('mode-essay-btn');
     const modeExam = document.getElementById('mode-exam-btn');
 
     if (lessonFilter) {
@@ -420,7 +461,11 @@ const App = {
       `;
       lessonFilter.addEventListener('change', (e) => {
         this.quiz.lessonFilter = e.target.value;
-        this.setupQuiz();
+        if (this.quiz.mode === 'essay') {
+          this.renderEssayProblems();
+        } else {
+          this.setupQuiz();
+        }
       });
     }
 
@@ -433,22 +478,63 @@ const App = {
 
     if (modePractice) {
       modePractice.addEventListener('click', () => {
-        this.quiz.mode = 'practice';
-        modePractice.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
-        modeExam.classList.remove('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
-        document.getElementById('exam-timer-box')?.classList.add('hidden');
-        this.setupQuiz();
+        this.switchPracticeMode('practice');
+      });
+    }
+
+    if (modeEssay) {
+      modeEssay.addEventListener('click', () => {
+        this.switchPracticeMode('essay');
       });
     }
 
     if (modeExam) {
       modeExam.addEventListener('click', () => {
-        this.quiz.mode = 'exam';
-        modeExam.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
-        modePractice.classList.remove('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
-        document.getElementById('exam-timer-box')?.classList.remove('hidden');
-        this.setupQuiz();
+        this.switchPracticeMode('exam');
       });
+    }
+  },
+
+  switchPracticeMode(mode) {
+    this.quiz.mode = mode;
+    const modePractice = document.getElementById('mode-practice-btn');
+    const modeEssay = document.getElementById('mode-essay-btn');
+    const modeExam = document.getElementById('mode-exam-btn');
+    const quizArea = document.getElementById('quiz-render-area');
+    const essayArea = document.getElementById('essay-render-area');
+    const examTimerBox = document.getElementById('exam-timer-box');
+    const levelFilter = document.getElementById('quiz-filter-level');
+
+    [modePractice, modeEssay, modeExam].forEach(btn => {
+      if (!btn) return;
+      btn.classList.remove('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
+      btn.classList.add('text-slate-600', 'dark:text-slate-300');
+    });
+
+    if (mode === 'practice') {
+      modePractice?.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
+      modePractice?.classList.remove('text-slate-600', 'dark:text-slate-300');
+      examTimerBox?.classList.add('hidden');
+      quizArea?.classList.remove('hidden');
+      essayArea?.classList.add('hidden');
+      if (levelFilter) levelFilter.classList.remove('hidden');
+      this.setupQuiz();
+    } else if (mode === 'essay') {
+      modeEssay?.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
+      modeEssay?.classList.remove('text-slate-600', 'dark:text-slate-300');
+      examTimerBox?.classList.add('hidden');
+      quizArea?.classList.add('hidden');
+      essayArea?.classList.remove('hidden');
+      if (levelFilter) levelFilter.classList.add('hidden');
+      this.renderEssayProblems();
+    } else if (mode === 'exam') {
+      modeExam?.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-indigo-600', 'dark:text-white');
+      modeExam?.classList.remove('text-slate-600', 'dark:text-slate-300');
+      examTimerBox?.classList.remove('hidden');
+      quizArea?.classList.remove('hidden');
+      essayArea?.classList.add('hidden');
+      if (levelFilter) levelFilter.classList.remove('hidden');
+      this.setupQuiz();
     }
   },
 
@@ -931,6 +1017,253 @@ const App = {
     this.renderMath(container);
   },
 
+  // ESSAY PROBLEMS RENDERER & LOGIC
+  renderEssayProblems() {
+    const container = document.getElementById('essay-render-area');
+    if (!container) return;
+
+    if (typeof ESSAY_PROBLEMS === 'undefined' || !ESSAY_PROBLEMS.length) {
+      container.innerHTML = `<div class="glass-card rounded-2xl p-8 text-center text-slate-500">Chưa có bài tập tự luận.</div>`;
+      return;
+    }
+
+    let list = [...ESSAY_PROBLEMS];
+    if (this.quiz.lessonFilter && this.quiz.lessonFilter !== 'all') {
+      list = list.filter(p => p.lessonId === this.quiz.lessonFilter);
+    }
+
+    const completedCount = Object.keys(this.progress.completedEssays || {}).filter(id => this.progress.completedEssays[id]).length;
+    const totalCount = ESSAY_PROBLEMS.length;
+
+    container.innerHTML = `
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">
+                10 Dạng Bài Chuẩn SGK
+              </span>
+              <span class="text-xs text-slate-400">Có chấm đáp số tự động</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-1.5">
+              Bài Tập Tự Luận & Hướng Dẫn Giải Chi Tiết
+            </h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Rèn luyện kỹ năng phân tích hiện tượng, lập luận chọn chiều dương, thiết lập phương trình và trình bày bài giải tự luận chuẩn mực.
+            </p>
+          </div>
+          <div class="bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 px-4 py-3 rounded-2xl text-center shrink-0">
+            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 block">Tiến độ tự luận</span>
+            <span class="text-xl font-black text-indigo-600 dark:text-indigo-400">${completedCount} / ${totalCount} bài</span>
+            <div class="w-24 bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-1.5 overflow-hidden mx-auto">
+              <div class="bg-indigo-600 h-full rounded-full transition-all duration-300" style="width: ${(completedCount / totalCount) * 100}%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      ${list.length === 0 ? `
+        <div class="glass-card rounded-2xl p-12 text-center text-slate-500">
+          <p class="text-base font-semibold">Chưa có bài tập tự luận cho bài học đã chọn.</p>
+          <button onclick="document.getElementById('quiz-filter-lesson').value='all'; App.quiz.lessonFilter='all'; App.renderEssayProblems();"
+            class="mt-3 px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold hover:bg-indigo-700 transition">
+            Xem tất cả bài tập tự luận
+          </button>
+        </div>
+      ` : list.map((prob) => {
+        const isCompleted = !!this.progress.completedEssays?.[prob.id];
+        const draftText = this.progress.essayDrafts?.[prob.id] || '';
+        return `
+          <div class="glass-card rounded-2xl p-6 shadow-sm border ${isCompleted ? 'border-emerald-400 dark:border-emerald-600/70 ring-1 ring-emerald-400/30' : 'border-slate-200 dark:border-slate-800'} transition-all mb-6" id="essay-card-${prob.id}">
+            <!-- Header -->
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+              <div class="flex items-center space-x-2">
+                <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">
+                  Bài ${prob.lessonNumber}: ${prob.lessonTitle}
+                </span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                  ${prob.difficulty}
+                </span>
+              </div>
+              <button onclick="App.toggleEssayCompleted('${prob.id}')"
+                class="flex items-center space-x-1.5 px-3 py-1 rounded-xl text-xs font-semibold transition ${isCompleted ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'}">
+                <span>${isCompleted ? '✅ Đã hoàn thành' : '⚪ Đánh dấu hoàn thành'}</span>
+              </button>
+            </div>
+
+            <!-- Problem Statement -->
+            <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-2">
+              ${prob.title}
+            </h3>
+            <div class="text-sm text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-50/70 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-200 dark:border-slate-700/80 mb-4">
+              ${prob.problem}
+            </div>
+
+            <!-- Given / Summary -->
+            ${prob.given && prob.given.length ? `
+              <div class="mb-4 p-3.5 bg-amber-50/60 dark:bg-amber-950/30 rounded-xl border border-amber-200/80 dark:border-amber-900/40 text-xs">
+                <span class="font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider block mb-1">📌 Tóm tắt giả thiết:</span>
+                <ul class="list-disc list-inside space-y-0.5 text-amber-900 dark:text-amber-200">
+                  ${prob.given.map(g => `<li>${g}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+
+            <!-- Hints Toggle Button -->
+            <div class="mb-4">
+              <button onclick="App.toggleEssayHint('${prob.id}')"
+                class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-1">
+                <span>💡 Xem gợi ý phương pháp giải</span>
+                <span id="hint-icon-${prob.id}" class="text-[10px]">▼</span>
+              </button>
+              <div id="essay-hint-${prob.id}" class="hidden mt-2 p-3.5 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 space-y-1">
+                ${prob.hints.map(h => `<p>• ${h}</p>`).join('')}
+              </div>
+            </div>
+
+            <!-- Student Scratchpad Workspace -->
+            <div class="mb-4 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+              <div class="flex items-center justify-between">
+                <label for="essay-draft-${prob.id}" class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center">
+                  <span class="mr-1.5">✍️</span> Vở nháp / Trình bày bài giải của học sinh:
+                </label>
+                <span class="text-[10px] text-slate-400" id="draft-status-${prob.id}">Tự động lưu</span>
+              </div>
+              <textarea id="essay-draft-${prob.id}" rows="3"
+                oninput="App.saveEssayDraft('${prob.id}', this.value)"
+                placeholder="Nhập tóm tắt, các bước biến đổi công thức hoặc bài làm của bạn vào đây..."
+                class="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">${draftText}</textarea>
+
+              <!-- Numeric Answer Quick Check -->
+              ${prob.numericCheck ? `
+                <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-2">
+                  <span class="text-xs font-semibold text-slate-600 dark:text-slate-400">${prob.numericCheck.label}</span>
+                  <div class="flex items-center space-x-2">
+                    <input type="number" step="any" id="essay-ans-${prob.id}" placeholder="Đáp số..."
+                      class="w-28 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-bold focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <span class="text-xs text-slate-500 font-semibold">${prob.numericCheck.unit || ''}</span>
+                    <button onclick="App.checkEssayAnswer('${prob.id}')"
+                      class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                      Kiểm tra
+                    </button>
+                  </div>
+                  <div id="essay-feedback-${prob.id}" class="text-xs font-bold"></div>
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- Solution Toggle Button -->
+            <div>
+              <button onclick="App.toggleEssaySolution('${prob.id}')"
+                class="w-full sm:w-auto px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-2">
+                <span>📖 Xem Hướng Dẫn & Lời Giải Chi Tiết</span>
+                <span id="solution-icon-${prob.id}" class="text-[10px]">▼</span>
+              </button>
+
+              <!-- Detailed Solution Box (Hidden by default) -->
+              <div id="essay-solution-${prob.id}" class="hidden mt-4 p-5 bg-indigo-50/50 dark:bg-slate-900/90 rounded-2xl border border-indigo-200/80 dark:border-indigo-900/60 space-y-4">
+                <div class="flex items-center space-x-2 text-indigo-700 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider">
+                  <span>✨ Lời Giải Chi Tiết Chuẩn Sư Phạm</span>
+                </div>
+
+                <div class="space-y-3">
+                  ${prob.solution.steps.map(step => `
+                    <div class="p-3.5 bg-white dark:bg-slate-800/80 rounded-xl border border-indigo-100 dark:border-slate-700">
+                      <h4 class="text-xs font-bold text-indigo-600 dark:text-indigo-400 mb-1.5">${step.title}</h4>
+                      <div class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">${step.content}</div>
+                    </div>
+                  `).join('')}
+                </div>
+
+                ${prob.solution.note ? `
+                  <div class="p-3.5 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                    ${prob.solution.note}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('')}
+    `;
+
+    this.renderMath(container);
+  },
+
+  toggleEssayHint(id) {
+    const el = document.getElementById(`essay-hint-${id}`);
+    const icon = document.getElementById(`hint-icon-${id}`);
+    if (!el) return;
+    el.classList.toggle('hidden');
+    if (icon) icon.textContent = el.classList.contains('hidden') ? '▼' : '▲';
+  },
+
+  toggleEssaySolution(id) {
+    const el = document.getElementById(`essay-solution-${id}`);
+    const icon = document.getElementById(`solution-icon-${id}`);
+    if (!el) return;
+    el.classList.toggle('hidden');
+    if (icon) icon.textContent = el.classList.contains('hidden') ? '▼' : '▲';
+    if (!el.classList.contains('hidden')) {
+      this.renderMath(el);
+    }
+  },
+
+  saveEssayDraft(id, val) {
+    if (!this.progress.essayDrafts) this.progress.essayDrafts = {};
+    this.progress.essayDrafts[id] = val;
+    this.saveProgress();
+    const status = document.getElementById(`draft-status-${id}`);
+    if (status) {
+      status.textContent = 'Đã lưu';
+      setTimeout(() => { status.textContent = 'Tự động lưu'; }, 1500);
+    }
+  },
+
+  checkEssayAnswer(id) {
+    const prob = (typeof ESSAY_PROBLEMS !== 'undefined' ? ESSAY_PROBLEMS : []).find(p => p.id === id);
+    if (!prob || !prob.numericCheck) return;
+    const input = document.getElementById(`essay-ans-${id}`);
+    const feedback = document.getElementById(`essay-feedback-${id}`);
+    if (!input || !feedback) return;
+
+    const val = parseFloat(input.value);
+    if (isNaN(val)) {
+      feedback.className = 'text-xs font-bold text-amber-600 dark:text-amber-400';
+      feedback.textContent = 'Vui lòng nhập giá trị số!';
+      return;
+    }
+
+    const expected = prob.numericCheck.expected;
+    const tol = Math.abs(expected * 0.03) || 0.1; // 3% tolerance or 0.1
+    if (Math.abs(val - expected) <= tol) {
+      feedback.className = 'text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1';
+      feedback.innerHTML = '<span>✅ Chính xác tuyệt đối! Đáp số rất chuẩn.</span>';
+      SoundEffects.correct();
+      launchConfetti();
+      this.setEssayCompleted(id, true);
+    } else {
+      feedback.className = 'text-xs font-bold text-rose-600 dark:text-rose-400 flex items-center space-x-1';
+      feedback.innerHTML = `<span>❌ Chưa chính xác. (Gợi ý: ~${expected} ${prob.numericCheck.unit || ''})</span>`;
+      SoundEffects.wrong();
+    }
+  },
+
+  toggleEssayCompleted(id) {
+    if (!this.progress.completedEssays) this.progress.completedEssays = {};
+    const current = !!this.progress.completedEssays[id];
+    this.setEssayCompleted(id, !current);
+  },
+
+  setEssayCompleted(id, completed) {
+    if (!this.progress.completedEssays) this.progress.completedEssays = {};
+    this.progress.completedEssays[id] = completed;
+    this.saveProgress();
+    this.renderEssayProblems();
+    this.renderStats();
+  },
+
   // STATS & MISTAKE NOTEBOOK
   renderStats() {
     const container = document.getElementById('stats-container');
@@ -951,9 +1284,11 @@ const App = {
     });
 
     const accuracy = answeredCount > 0 ? ((correctCount / answeredCount) * 100).toFixed(0) : 0;
+    const completedEssayCount = Object.keys(this.progress.completedEssays || {}).filter(k => this.progress.completedEssays[k]).length;
+    const totalEssays = typeof ESSAY_PROBLEMS !== 'undefined' ? ESSAY_PROBLEMS.length : 10;
 
     container.innerHTML = `
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="glass-card rounded-2xl p-5 shadow-sm border-l-4 border-indigo-500">
           <div class="text-xs text-slate-500 font-medium">Tiến độ lý thuyết</div>
           <div class="text-2xl font-extrabold text-indigo-600 mt-1">${readCount} / ${LESSONS_DATA.length} bài</div>
@@ -962,8 +1297,16 @@ const App = {
           </div>
         </div>
 
+        <div class="glass-card rounded-2xl p-5 shadow-sm border-l-4 border-blue-500">
+          <div class="text-xs text-slate-500 font-medium">Bài tập tự luận</div>
+          <div class="text-2xl font-extrabold text-blue-600 mt-1">${completedEssayCount} / ${totalEssays} bài</div>
+          <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full mt-3 overflow-hidden">
+            <div class="bg-blue-600 h-2 rounded-full" style="width: ${(completedEssayCount / totalEssays) * 100}%"></div>
+          </div>
+        </div>
+
         <div class="glass-card rounded-2xl p-5 shadow-sm border-l-4 border-emerald-500">
-          <div class="text-xs text-slate-500 font-medium">Số câu đã luyện tập</div>
+          <div class="text-xs text-slate-500 font-medium">Số câu trắc nghiệm</div>
           <div class="text-2xl font-extrabold text-emerald-600 mt-1">${answeredCount} câu</div>
           <div class="text-xs text-slate-400 mt-2">Đúng: ${correctCount} · Sai: ${wrongQuestions.length}</div>
         </div>
